@@ -486,6 +486,42 @@ export interface ApiBannerBanner extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiEventosFeiraEventosFeira
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'eventos_feiras';
+  info: {
+    displayName: 'Eventos_feira';
+    pluralName: 'eventos-feiras';
+    singularName: 'eventos-feira';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    dataHorario: Schema.Attribute.DateTime;
+    descricao: Schema.Attribute.String;
+    imagemEvento: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios',
+      true
+    >;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::eventos-feira.eventos-feira'
+    > &
+      Schema.Attribute.Private;
+    miniDescricao: Schema.Attribute.String;
+    nomeEvento: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiProjetoProjeto extends Struct.CollectionTypeSchema {
   collectionName: 'projetos';
   info: {
@@ -1028,6 +1064,7 @@ declare module '@strapi/strapi' {
       'admin::user': AdminUser;
       'api::a-feira.a-feira': ApiAFeiraAFeira;
       'api::banner.banner': ApiBannerBanner;
+      'api::eventos-feira.eventos-feira': ApiEventosFeiraEventosFeira;
       'api::projeto.projeto': ApiProjetoProjeto;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
