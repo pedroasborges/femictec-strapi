@@ -522,6 +522,36 @@ export interface ApiEventosFeiraEventosFeira
   };
 }
 
+export interface ApiFooterFooter extends Struct.SingleTypeSchema {
+  collectionName: 'footers';
+  info: {
+    displayName: 'Footer';
+    pluralName: 'footers';
+    singularName: 'footer';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    Email: Schema.Attribute.Email;
+    Instagram: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::footer.footer'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    Telefone: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiProjetoProjeto extends Struct.CollectionTypeSchema {
   collectionName: 'projetos';
   info: {
@@ -1065,6 +1095,7 @@ declare module '@strapi/strapi' {
       'api::a-feira.a-feira': ApiAFeiraAFeira;
       'api::banner.banner': ApiBannerBanner;
       'api::eventos-feira.eventos-feira': ApiEventosFeiraEventosFeira;
+      'api::footer.footer': ApiFooterFooter;
       'api::projeto.projeto': ApiProjetoProjeto;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
