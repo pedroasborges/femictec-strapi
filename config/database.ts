@@ -1,8 +1,14 @@
 import path from 'path';
 import type { Core } from '@strapi/strapi';
 
+type DbClient = 'mysql' | 'postgres' | 'sqlite';
+
 const config = ({ env }: Core.Config.Shared.ConfigParams): Core.Config.Database => {
-  const client = env('DATABASE_CLIENT', 'sqlite');
+  const nodeEnv = env('NODE_ENV', 'development');
+  const isProduction = nodeEnv === 'production';
+  const client = (
+    isProduction ? env('DATABASE_CLIENT', 'postgres') : env('DATABASE_CLIENT_LOCAL', 'sqlite')
+  ) as DbClient;
 
   const connections = {
     mysql: {
@@ -53,11 +59,11 @@ const config = ({ env }: Core.Config.Shared.ConfigParams): Core.Config.Database 
 
   return {
     connection: {
-      client,
+      client: client as Core.Config.Database['connection']['client'],
       ...connections[client],
       acquireConnectionTimeout: env.int('DATABASE_CONNECTION_TIMEOUT', 60000),
     },
-  };
+  } as Core.Config.Database;
 };
 
 export default config;

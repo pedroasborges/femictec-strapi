@@ -522,21 +522,12 @@ export interface ApiEventosFeiraEventosFeira
   };
 }
 
-<<<<<<< HEAD
-export interface ApiNoticiaNoticia extends Struct.CollectionTypeSchema {
-  collectionName: 'noticias';
-  info: {
-    displayName: 'Noticia';
-    pluralName: 'noticias';
-    singularName: 'noticia';
-=======
 export interface ApiFooterFooter extends Struct.SingleTypeSchema {
   collectionName: 'footers';
   info: {
     displayName: 'Footer';
     pluralName: 'footers';
     singularName: 'footer';
->>>>>>> 4943b00e489a4a578b2be76d48e90a970a9fef70
   };
   options: {
     draftAndPublish: true;
@@ -545,7 +536,36 @@ export interface ApiFooterFooter extends Struct.SingleTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-<<<<<<< HEAD
+    Email: Schema.Attribute.Email;
+    Instagram: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::footer.footer'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    Telefone: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiNoticiaNoticia extends Struct.CollectionTypeSchema {
+  collectionName: 'noticias';
+  info: {
+    displayName: 'Noticia';
+    pluralName: 'noticias';
+    singularName: 'noticia';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
     dataHorario: Schema.Attribute.DateTime;
     descricao: Schema.Attribute.String;
     imagem: Schema.Attribute.Media<
@@ -561,18 +581,6 @@ export interface ApiFooterFooter extends Struct.SingleTypeSchema {
     miniDescricao: Schema.Attribute.Text;
     publishedAt: Schema.Attribute.DateTime;
     titulo: Schema.Attribute.String;
-=======
-    Email: Schema.Attribute.Email;
-    Instagram: Schema.Attribute.String;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::footer.footer'
-    > &
-      Schema.Attribute.Private;
-    publishedAt: Schema.Attribute.DateTime;
-    Telefone: Schema.Attribute.String;
->>>>>>> 4943b00e489a4a578b2be76d48e90a970a9fef70
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1122,11 +1130,8 @@ declare module '@strapi/strapi' {
       'api::a-feira.a-feira': ApiAFeiraAFeira;
       'api::banner.banner': ApiBannerBanner;
       'api::eventos-feira.eventos-feira': ApiEventosFeiraEventosFeira;
-<<<<<<< HEAD
-      'api::noticia.noticia': ApiNoticiaNoticia;
-=======
       'api::footer.footer': ApiFooterFooter;
->>>>>>> 4943b00e489a4a578b2be76d48e90a970a9fef70
+      'api::noticia.noticia': ApiNoticiaNoticia;
       'api::projeto.projeto': ApiProjetoProjeto;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
