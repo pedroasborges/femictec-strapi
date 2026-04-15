@@ -4,7 +4,7 @@ import { buildRemoteDeployScript } from './lib/ssh.mjs';
 
 export function buildPlan(options = {}) {
   const host = options.host;
-  const user = options.user;
+  const user = options.user ?? '';
   const projectPath = options.projectPath ?? '/opt/femictec';
   const repo = options.repo;
   const branch = options.branch ?? 'main';
@@ -13,19 +13,17 @@ export function buildPlan(options = {}) {
   if (!host) {
     throw new Error('Missing --host.');
   }
-  if (!user) {
-    throw new Error('Missing --user.');
-  }
   if (!repo) {
     throw new Error('Missing --repo.');
   }
 
   const remoteScript = buildRemoteDeployScript({ projectPath, repo, branch, envFile });
+  const target = user ? `${user}@${host}` : host;
 
   return [
     {
       cmd: 'ssh',
-      args: [`${user}@${host}`, remoteScript],
+      args: [target, remoteScript],
     },
   ];
 }

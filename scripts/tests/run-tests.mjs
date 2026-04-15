@@ -27,11 +27,10 @@ test('push-git requires message unless allow-empty', () => {
 
 test('deploy-cloud validates required fields', () => {
   assert.throws(() => buildDeployPlan({ host: '', user: 'root', repo: 'git@repo' }), /Missing --host/);
-  assert.throws(() => buildDeployPlan({ host: '10.0.0.1', user: '', repo: 'git@repo' }), /Missing --user/);
   assert.throws(() => buildDeployPlan({ host: '10.0.0.1', user: 'root', repo: '' }), /Missing --repo/);
 });
 
-test('deploy-cloud builds ssh command with remote script', () => {
+test('deploy-cloud builds ssh command with remote script (with user)', () => {
   const plan = buildDeployPlan({
     host: '10.13.33.13',
     user: 'deploy',
@@ -45,6 +44,20 @@ test('deploy-cloud builds ssh command with remote script', () => {
   assert.equal(plan[0].cmd, 'ssh');
   assert.equal(plan[0].args[0], 'deploy@10.13.33.13');
   assert.match(plan[0].args[1], /docker compose up -d/);
+});
+
+test('deploy-cloud supports host alias without user', () => {
+  const plan = buildDeployPlan({
+    host: 'osi-femictec',
+    repo: 'https://gitlab.example/repo.git',
+    projectPath: '/opt/femictec',
+    branch: 'main',
+    envFile: '.env.production',
+  });
+
+  assert.equal(plan.length, 1);
+  assert.equal(plan[0].cmd, 'ssh');
+  assert.equal(plan[0].args[0], 'osi-femictec');
 });
 
 test('push-and-deploy prepends tests and build', () => {

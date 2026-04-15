@@ -5,8 +5,8 @@ Este diretorio contem scripts para acelerar fluxo local + nuvem sem alterar codi
 ## Comandos disponiveis
 - `npm run ops:pull`: atualiza branch e sobe Docker (`build + up -d + ps`).
 - `npm run ops:push -- --message "..."`: faz `git add/commit/push`.
-- `npm run ops:deploy -- --host ... --user ... --repo ...`: faz deploy remoto por SSH.
-- `npm run ops:push-deploy -- --message "..." --host ... --user ... --repo ...`: fluxo completo.
+- `npm run ops:deploy -- --host ... [--user ...] --repo ...`: faz deploy remoto por SSH.
+- `npm run ops:push-deploy -- --message "..." --host ... [--user ...] --repo ...`: fluxo completo.
 - `npm run test:scripts`: testa a montagem dos fluxos.
 
 ## Exemplos
@@ -20,16 +20,20 @@ Enviar alteracoes para git:
 npm run ops:push -- --message "chore: atualiza deploy scripts"
 ```
 
-Deploy em nuvem OSI:
+Deploy em nuvem OSI (alias SSH):
 ```bash
-npm run ops:deploy -- --host 10.13.33.13 --user deploy --repo git@github.com:org/femictec.git --branch main --deploy-env-file .env.production --path /opt/femictec
+npm run ops:deploy -- --host osi-femictec --repo https://gitlab.novohamburgo.rs.gov.br/governo-digital/femictec/ --branch main --deploy-env-file .env.production --path /opt/femictec
+```
+
+Deploy em nuvem OSI (host + user):
+```bash
+npm run ops:deploy -- --host 10.13.33.13 --user deploy --repo https://gitlab.novohamburgo.rs.gov.br/governo-digital/femictec/ --branch main --deploy-env-file .env.production --path /opt/femictec
 ```
 
 Fluxo completo:
 ```bash
-npm run ops:push-deploy -- --message "chore: release" --host 10.13.33.13 --user deploy --repo git@github.com:org/femictec.git --branch main --deploy-env-file .env.production --path /opt/femictec
+npm run ops:push-deploy -- --message "chore: release" --host osi-femictec --repo https://gitlab.novohamburgo.rs.gov.br/governo-digital/femictec/ --branch main --deploy-env-file .env.production --path /opt/femictec
 ```
 
 ## Modo de seguranca
 Use `--dry-run` em qualquer script para ver os comandos sem executar.
-
