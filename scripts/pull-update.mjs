@@ -17,9 +17,9 @@ export function buildPlan(options = {}) {
   }
 
   plan.push(
-    { cmd: 'docker', args: ['compose', '--env-file', envFile, 'build'] },
-    { cmd: 'docker', args: ['compose', '--env-file', envFile, 'up', '-d'] },
-    { cmd: 'docker', args: ['compose', '--env-file', envFile, 'ps'] },
+    { cmd: 'docker', args: ['compose', '--env-file', envFile, 'build'], env: { ENV_FILE: envFile } },
+    { cmd: 'docker', args: ['compose', '--env-file', envFile, 'up', '-d'], env: { ENV_FILE: envFile } },
+    { cmd: 'docker', args: ['compose', '--env-file', envFile, 'ps'], env: { ENV_FILE: envFile } },
   );
 
   return plan;

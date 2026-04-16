@@ -1,5 +1,5 @@
 ﻿#!/usr/bin/env node
-import { parseCliArgs, runPlan, fail, toBool, isMainModule } from './lib/common.mjs';
+import { parseCliArgs, runPlan, fail, toBool, isMainModule, runCommandCapture } from './lib/common.mjs';
 
 export function buildPlan(options = {}) {
   const message = options.message;
@@ -21,11 +21,43 @@ export function buildPlan(options = {}) {
   return plan;
 }
 
+export function resolveMessage(flags, positionals) {
+  if (flags.message) {
+    return String(flags.message).trim();
+  }
+
+  const cleaned = (positionals ?? []).filter((item) => !String(item).startsWith('--'));
+  if (!cleaned.length) {
+    return '';
+  }
+
+  if (cleaned[0].toLowerCase() === 'message') {
+    return cleaned.slice(1).join(' ').trim();
+  }
+
+  return cleaned.join(' ').trim();
+}
+
+async function assertHasChangesUnlessAllowEmpty(allowEmpty) {
+  if (allowEmpty) {
+    return;
+  }
+
+  const { stdout } = await runCommandCapture('git', ['status', '--porcelain']);
+  if (!stdout) {
+    throw new Error('No changes detected to commit.');
+  }
+}
+
 async function main() {
-  const { flags } = parseCliArgs(process.argv.slice(2));
-  const message = flags.message ? String(flags.message) : '';
+  const { flags, positionals } = parseCliArgs(process.argv.slice(2));
+  const message = resolveMessage(flags, positionals);
   const allowEmpty = toBool(flags['allow-empty']);
-  const dryRun = toBool(flags['dry-run']);
+  const dryRun = toBool(flags['dry-run']) || positionals.includes('--dry-run');
+
+  if (!dryRun) {
+    await assertHasChangesUnlessAllowEmpty(allowEmpty);
+  }
 
   const plan = buildPlan({ message, allowEmpty });
   await runPlan(plan, { dryRun });
@@ -36,4 +68,3 @@ if (isMainModule(import.meta.url, process.argv[1])) {
     fail(err.message);
   });
 }
-

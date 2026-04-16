@@ -1,10 +1,11 @@
 ﻿import assert from 'node:assert/strict';
 
 import { buildPlan as buildPullPlan } from '../pull-update.mjs';
-import { buildPlan as buildPushPlan } from '../push-git.mjs';
+import { buildPlan as buildPushPlan, resolveMessage } from '../push-git.mjs';
 import { buildPlan as buildDeployPlan } from '../deploy-cloud.mjs';
 import { buildPlan as buildPushDeployPlan } from '../push-and-deploy.mjs';
 import { buildRemoteDeployScript } from '../lib/ssh.mjs';
+import { parseCliArgs } from '../lib/common.mjs';
 
 const tests = [];
 
@@ -12,11 +13,23 @@ function test(name, fn) {
   tests.push({ name, fn });
 }
 
+test('parseCliArgs ignores standalone separator and keeps flags after it', () => {
+  const { flags, positionals } = parseCliArgs(['--', 'message', 'chore: ok', '--dry-run']);
+  assert.equal(flags['dry-run'], true);
+  assert.deepEqual(positionals, ['message', 'chore: ok']);
+});
+
 test('pull-update builds expected command flow', () => {
   const plan = buildPullPlan({ branch: 'main', envFile: '.env.production', skipBuild: false });
   assert.equal(plan[0].cmd, 'git');
   assert.deepEqual(plan[2].args, ['pull', '--ff-only', 'origin', 'main']);
   assert.deepEqual(plan.at(-1).args, ['compose', '--env-file', '.env.production', 'ps']);
+  assert.deepEqual(plan.at(-1).env, { ENV_FILE: '.env.production' });
+});
+
+test('resolveMessage supports mistaken positional syntax', () => {
+  const message = resolveMessage({}, ['message', 'chore: deploy', '--dry-run']);
+  assert.equal(message, 'chore: deploy');
 });
 
 test('push-git requires message unless allow-empty', () => {
@@ -28,6 +41,7 @@ test('push-git requires message unless allow-empty', () => {
 test('deploy-cloud validates required fields', () => {
   assert.throws(() => buildDeployPlan({ host: '', user: 'root', repo: 'git@repo' }), /Missing --host/);
   assert.throws(() => buildDeployPlan({ host: '10.0.0.1', user: 'root', repo: '' }), /Missing --repo/);
+  assert.throws(() => buildDeployPlan({ host: '10.0.0.1', user: 'root', repo: 'git@repo', sshPort: 'abc' }), /Invalid --ssh-port/);
 });
 
 test('deploy-cloud builds ssh command with remote script (with user)', () => {
@@ -38,12 +52,15 @@ test('deploy-cloud builds ssh command with remote script (with user)', () => {
     projectPath: '/opt/femictec',
     branch: 'main',
     envFile: '.env.production',
+    identityFile: '/home/deploy/.ssh/id_ed25519',
+    sshPort: '2222',
   });
 
   assert.equal(plan.length, 1);
   assert.equal(plan[0].cmd, 'ssh');
-  assert.equal(plan[0].args[0], 'deploy@10.13.33.13');
-  assert.match(plan[0].args[1], /docker compose up -d/);
+  assert.deepEqual(plan[0].args.slice(0, 4), ['-i', '/home/deploy/.ssh/id_ed25519', '-p', '2222']);
+  assert.equal(plan[0].args[4], 'deploy@10.13.33.13');
+  assert.match(plan[0].args[5], /docker compose --env-file/);
 });
 
 test('deploy-cloud supports host alias without user', () => {
@@ -76,7 +93,7 @@ test('push-and-deploy prepends tests and build', () => {
   assert.equal(plan.at(-1).cmd, 'ssh');
 });
 
-test('remote script includes expected guarded clone flow', () => {
+test('remote script includes hardening checks', () => {
   const script = buildRemoteDeployScript({
     projectPath: '/opt/femictec',
     repo: 'git@github.com:org/repo.git',
@@ -84,9 +101,11 @@ test('remote script includes expected guarded clone flow', () => {
     envFile: '.env.production',
   });
 
-  assert.match(script, /if \[ ! -d/);
-  assert.match(script, /git clone/);
-  assert.match(script, /git pull --ff-only origin/);
+  assert.match(script, /command -v git/);
+  assert.match(script, /docker compose version/);
+  assert.match(script, /git clone --branch/);
+  assert.match(script, /git remote set-url origin/);
+  assert.match(script, /Arquivo de ambiente nao encontrado/);
 });
 
 let failed = 0;

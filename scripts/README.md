@@ -20,14 +20,19 @@ Enviar alteracoes para git:
 npm run ops:push -- --message "chore: atualiza deploy scripts"
 ```
 
+Tambem funciona se voce digitar por engano:
+```bash
+npm run ops:push -- -- message "chore: atualiza deploy scripts"
+```
+
 Deploy em nuvem OSI (alias SSH):
 ```bash
 npm run ops:deploy -- --host osi-femictec --repo https://gitlab.novohamburgo.rs.gov.br/governo-digital/femictec/ --branch main --deploy-env-file .env.production --path /opt/femictec
 ```
 
-Deploy em nuvem OSI (host + user):
+Deploy com chave e porta SSH especificas:
 ```bash
-npm run ops:deploy -- --host 10.13.33.13 --user deploy --repo https://gitlab.novohamburgo.rs.gov.br/governo-digital/femictec/ --branch main --deploy-env-file .env.production --path /opt/femictec
+npm run ops:deploy -- --host 10.13.33.13 --user deploy --identity-file C:/Users/pedroborges/.ssh/osi_deploy --ssh-port 22 --repo https://gitlab.novohamburgo.rs.gov.br/governo-digital/femictec/ --branch main --deploy-env-file .env.production --path /opt/femictec
 ```
 
 Fluxo completo:
