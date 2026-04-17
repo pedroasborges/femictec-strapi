@@ -1,0 +1,26 @@
+{
+  "collectionName": "components_femictec_edicao_cards",
+  "info": {
+    "displayName": "edicao-card"
+  },
+  "options": {},
+  "attributes": {
+    "titulo": {
+      "type": "string"
+    },
+    "subtitulo": {
+      "type": "string"
+    },
+    "imagem": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    }
+  },
+  "config": {}
+}

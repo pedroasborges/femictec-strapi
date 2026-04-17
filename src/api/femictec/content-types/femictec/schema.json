@@ -1,0 +1,144 @@
+{
+  "kind": "singleType",
+  "collectionName": "femictecs",
+  "info": {
+    "singularName": "femictec",
+    "pluralName": "femictecs",
+    "displayName": "Femictec"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "bannerTitulo": {
+      "type": "string"
+    },
+    "bannerDestaque": {
+      "type": "string"
+    },
+    "oQueTitulo": {
+      "type": "string"
+    },
+    "oQueDescricao": {
+      "type": "text"
+    },
+    "missaoTitulo": {
+      "type": "string"
+    },
+    "missaoDescricao": {
+      "type": "text"
+    },
+    "missaoDestaque": {
+      "type": "string"
+    },
+    "impactoTitulo": {
+      "type": "string"
+    },
+    "impactoDescricao": {
+      "type": "text"
+    },
+    "estandesTitulo": {
+      "type": "string"
+    },
+    "estandesSubtitulo": {
+      "type": "string"
+    },
+    "estandesImagem": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "estandesImagemAlt": {
+      "type": "string"
+    },
+    "quemRealizaTitulo": {
+      "type": "string"
+    },
+    "organizacaoTitulo": {
+      "type": "string"
+    },
+    "organizacaoDescricao": {
+      "type": "text"
+    },
+    "comissaoTitulo": {
+      "type": "string"
+    },
+    "comissaoDescricao": {
+      "type": "text"
+    },
+    "imagemEntrada": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "imagemEntradaAlt": {
+      "type": "string"
+    },
+    "imagemEntradaLabel": {
+      "type": "string"
+    },
+    "parceirosTitulo": {
+      "type": "string"
+    },
+    "parceiros": {
+      "type": "component",
+      "component": "parceiro-item.parceiros",
+      "repeatable": false
+    },
+    "historicoTitulo": {
+      "type": "string"
+    },
+    "historicoDescricao": {
+      "type": "text"
+    },
+    "trajetoriaTitulo": {
+      "type": "string"
+    },
+    "trajetoriaSubtitulo": {
+      "type": "string"
+    },
+    "trajetoriaImagem": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "trajetoriaImagemAlt": {
+      "type": "string"
+    },
+    "edicoesCards": {
+      "type": "component",
+      "component": "edicao-card.edicoes-cards",
+      "repeatable": false
+    },
+    "galeriaLabel": {
+      "type": "string"
+    },
+    "galeriaUrl": {
+      "type": "string"
+    },
+    "historicoTabelaTitulo": {
+      "type": "string"
+    },
+    "historicoTabelaLinhas": {
+      "type": "component",
+      "component": "historico-linha.historico-tabela-linhas",
+      "repeatable": false
+    }
+  }
+}

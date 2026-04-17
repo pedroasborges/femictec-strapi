@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_femictec_historico_linhas",
+  "info": {
+    "displayName": "historico-linha"
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string"
+    },
+    "valor": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}

@@ -538,6 +538,79 @@ export interface ApiFeiraFeira extends Struct.SingleTypeSchema {
   };
 }
 
+export interface ApiFemictecFemictec extends Struct.SingleTypeSchema {
+  collectionName: 'femictecs';
+  info: {
+    displayName: 'Femictec';
+    pluralName: 'femictecs';
+    singularName: 'femictec';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    bannerDestaque: Schema.Attribute.String;
+    bannerTitulo: Schema.Attribute.String;
+    comissaoDescricao: Schema.Attribute.Text;
+    comissaoTitulo: Schema.Attribute.String;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    edicoesCards: Schema.Attribute.Component<
+      'edicao-card.edicoes-cards',
+      false
+    >;
+    estandesImagem: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
+    estandesImagemAlt: Schema.Attribute.String;
+    estandesSubtitulo: Schema.Attribute.String;
+    estandesTitulo: Schema.Attribute.String;
+    galeriaLabel: Schema.Attribute.String;
+    galeriaUrl: Schema.Attribute.String;
+    historicoDescricao: Schema.Attribute.Text;
+    historicoTabelaLinhas: Schema.Attribute.Component<
+      'historico-linha.historico-tabela-linhas',
+      false
+    >;
+    historicoTabelaTitulo: Schema.Attribute.String;
+    historicoTitulo: Schema.Attribute.String;
+    imagemEntrada: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
+    imagemEntradaAlt: Schema.Attribute.String;
+    imagemEntradaLabel: Schema.Attribute.String;
+    impactoDescricao: Schema.Attribute.Text;
+    impactoTitulo: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::femictec.femictec'
+    > &
+      Schema.Attribute.Private;
+    missaoDescricao: Schema.Attribute.Text;
+    missaoDestaque: Schema.Attribute.String;
+    missaoTitulo: Schema.Attribute.String;
+    oQueDescricao: Schema.Attribute.Text;
+    oQueTitulo: Schema.Attribute.String;
+    organizacaoDescricao: Schema.Attribute.Text;
+    organizacaoTitulo: Schema.Attribute.String;
+    parceiros: Schema.Attribute.Component<'parceiro-item.parceiros', false>;
+    parceirosTitulo: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    quemRealizaTitulo: Schema.Attribute.String;
+    trajetoriaImagem: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
+    trajetoriaImagemAlt: Schema.Attribute.String;
+    trajetoriaSubtitulo: Schema.Attribute.String;
+    trajetoriaTitulo: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiFooterFooter extends Struct.SingleTypeSchema {
   collectionName: 'footers';
   info: {
@@ -1146,6 +1219,7 @@ declare module '@strapi/strapi' {
       'api::banner.banner': ApiBannerBanner;
       'api::eventos-feira.eventos-feira': ApiEventosFeiraEventosFeira;
       'api::feira.feira': ApiFeiraFeira;
+      'api::femictec.femictec': ApiFemictecFemictec;
       'api::footer.footer': ApiFooterFooter;
       'api::noticia.noticia': ApiNoticiaNoticia;
       'api::projeto.projeto': ApiProjetoProjeto;
