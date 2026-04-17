@@ -466,7 +466,7 @@ export interface ApiBannerBanner extends Struct.CollectionTypeSchema {
     singularName: 'banner';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
     createdAt: Schema.Attribute.DateTime;
