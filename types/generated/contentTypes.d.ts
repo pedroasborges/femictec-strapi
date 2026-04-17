@@ -430,34 +430,6 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
-export interface ApiAFeiraAFeira extends Struct.SingleTypeSchema {
-  collectionName: 'a_feiras';
-  info: {
-    displayName: 'A Feira';
-    pluralName: 'a-feiras';
-    singularName: 'a-feira';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::a-feira.a-feira'
-    > &
-      Schema.Attribute.Private;
-    publishedAt: Schema.Attribute.DateTime;
-    Texto: Schema.Attribute.Blocks;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-  };
-}
-
 export interface ApiBannerBanner extends Struct.CollectionTypeSchema {
   collectionName: 'banners';
   info: {
@@ -516,6 +488,50 @@ export interface ApiEventosFeiraEventosFeira
     miniDescricao: Schema.Attribute.String;
     nomeEvento: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiFeiraFeira extends Struct.SingleTypeSchema {
+  collectionName: 'feiras';
+  info: {
+    displayName: 'Feira';
+    pluralName: 'feiras';
+    singularName: 'feira';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    cronogramaItens: Schema.Attribute.String;
+    cronogramaTitulo: Schema.Attribute.String;
+    dataRealizacao: Schema.Attribute.String;
+    edicaoDescricao: Schema.Attribute.Text;
+    edicaoTitulo: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::feira.feira'> &
+      Schema.Attribute.Private;
+    mapaImagem: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
+    mapaImagemAlt: Schema.Attribute.String;
+    objetivosDescricao: Schema.Attribute.Text;
+    objetivosTitulo: Schema.Attribute.String;
+    programacaoDias: Schema.Attribute.String;
+    programacaoTitulo: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    regulamentoLabel: Schema.Attribute.String;
+    regulamentoTitulo: Schema.Attribute.String;
+    regulamentoUrl: Schema.Attribute.String;
+    tematicaImagem: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
+    tematicaImagemAlt: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1127,9 +1143,9 @@ declare module '@strapi/strapi' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
-      'api::a-feira.a-feira': ApiAFeiraAFeira;
       'api::banner.banner': ApiBannerBanner;
       'api::eventos-feira.eventos-feira': ApiEventosFeiraEventosFeira;
+      'api::feira.feira': ApiFeiraFeira;
       'api::footer.footer': ApiFooterFooter;
       'api::noticia.noticia': ApiNoticiaNoticia;
       'api::projeto.projeto': ApiProjetoProjeto;

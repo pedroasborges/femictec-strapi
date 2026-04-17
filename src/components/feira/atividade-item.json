@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_feira_atividade_items",
+  "info": {
+    "displayName": "atividade-item"
+  },
+  "options": {},
+  "attributes": {
+    "hotario": {
+      "type": "string"
+    },
+    "titulo": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}

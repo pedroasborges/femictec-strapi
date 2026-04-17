@@ -1,0 +1,78 @@
+{
+  "kind": "singleType",
+  "collectionName": "feiras",
+  "info": {
+    "singularName": "feira",
+    "pluralName": "feiras",
+    "displayName": "Feira"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "edicaoTitulo": {
+      "type": "string"
+    },
+    "edicaoDescricao": {
+      "type": "text"
+    },
+    "tematicaImagem": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "tematicaImagemAlt": {
+      "type": "string"
+    },
+    "objetivosTitulo": {
+      "type": "string"
+    },
+    "objetivosDescricao": {
+      "type": "text"
+    },
+    "regulamentoTitulo": {
+      "type": "string"
+    },
+    "regulamentoLabel": {
+      "type": "string"
+    },
+    "regulamentoUrl": {
+      "type": "string"
+    },
+    "cronogramaTitulo": {
+      "type": "string"
+    },
+    "dataRealizacao": {
+      "type": "string"
+    },
+    "cronogramaItens": {
+      "type": "string"
+    },
+    "mapaImagem": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "mapaImagemAlt": {
+      "type": "string"
+    },
+    "programacaoTitulo": {
+      "type": "string"
+    },
+    "programacaoDias": {
+      "type": "string"
+    }
+  }
+}

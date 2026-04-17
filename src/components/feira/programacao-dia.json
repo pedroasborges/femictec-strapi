@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_feira_programacao_dias",
+  "info": {
+    "displayName": "programacao-dia"
+  },
+  "options": {},
+  "attributes": {
+    "dia": {
+      "type": "string"
+    },
+    "data": {
+      "type": "string"
+    },
+    "atividades": {
+      "type": "component",
+      "component": "atividade-item.atividades",
+      "repeatable": false
+    }
+  },
+  "config": {}
+}
