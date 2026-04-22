@@ -11,6 +11,15 @@
   },
   "pluginOptions": {},
   "attributes": {
+    "menuItemInicioLabel": {
+      "type": "string"
+    },
+    "menuItemQuemRealizaLabel": {
+      "type": "string"
+    },
+    "menuItemHistoricoLabel": {
+      "type": "string"
+    },
     "bannerTitulo": {
       "type": "string"
     },
