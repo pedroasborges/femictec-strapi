@@ -23,6 +23,16 @@
     "bannerTitulo": {
       "type": "string"
     },
+    "bannerImagem": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
     "bannerDestaque": {
       "type": "string"
     },

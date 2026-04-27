@@ -550,6 +550,9 @@ export interface ApiFemictecFemictec extends Struct.SingleTypeSchema {
   };
   attributes: {
     bannerDestaque: Schema.Attribute.String;
+    bannerImagem: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
     bannerTitulo: Schema.Attribute.String;
     comissaoDescricao: Schema.Attribute.Text;
     comissaoTitulo: Schema.Attribute.String;
