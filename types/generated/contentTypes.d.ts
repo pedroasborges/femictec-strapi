@@ -588,6 +588,9 @@ export interface ApiFemictecFemictec extends Struct.SingleTypeSchema {
       'api::femictec.femictec'
     > &
       Schema.Attribute.Private;
+    menuItemHistoricoLabel: Schema.Attribute.String;
+    menuItemInicioLabel: Schema.Attribute.String;
+    menuItemQuemRealizaLabel: Schema.Attribute.String;
     missaoDescricao: Schema.Attribute.Text;
     missaoDestaque: Schema.Attribute.String;
     missaoTitulo: Schema.Attribute.String;
