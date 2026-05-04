@@ -2,6 +2,15 @@
  * femictec router
  */
 
-import { factories } from '@strapi/strapi';
-
-export default factories.createCoreRouter('api::femictec.femictec');
+export default {
+  routes: [
+    {
+      method: 'GET',
+      path: '/public/femictec/current-event',
+      handler: 'femictec.currentEvent',
+      config: {
+        auth: false,
+      },
+    },
+  ],
+};
