@@ -29,7 +29,7 @@ npm run start
 
 Endpoint:
 
-```bash \ retorna edição atual da feira
+```bash \retorna edição atual da feira 
 GET /api/public/femictec/current-event
 ```
 
