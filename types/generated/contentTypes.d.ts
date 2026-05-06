@@ -693,16 +693,25 @@ export interface ApiProjetoProjeto extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    area: Schema.Attribute.String;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     Descricao: Schema.Attribute.Blocks;
+    escola: Schema.Attribute.String;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::projeto.projeto'
     > &
       Schema.Attribute.Private;
+    participantes: Schema.Attribute.Integer &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 1;
+        },
+        number
+      >;
     publishedAt: Schema.Attribute.DateTime;
     Titulo: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;

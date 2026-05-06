@@ -24,6 +24,7 @@ npm run start
 - `Eventos_Feira` (collection type): endpoint `/api/eventos-feiras`
 - `Noticia` (collection type): endpoint `/api/noticias`
 - `Current Event` (rota custom publica): endpoint `/api/public/femictec/current-event`
+- `Stats` (rota custom publica): endpoint `/api/public/femictec/stats`
 
 ## Endpoint customizado: Current Event
 
@@ -39,6 +40,34 @@ Retorno (`data`):
 - `dates`: `string | null`
 - `status`: `active | submission_open | submission_closed`
 - `submissionDeadline`: `string | null`
+
+## Endpoint customizado: Stats
+
+Endpoint:
+
+```bash
+GET /api/public/femictec/stats
+```
+
+Retorno (`data`):
+
+- `totalProjects`: `number`
+- `totalSchools`: `number`
+- `totalParticipants`: `number`
+- `totalAreas`: `number`
+
+Fonte dos agregados (`Projeto`):
+
+- `escola` (`string`)
+- `area` (`string`)
+- `participantes` (`integer`)
+
+Regra de agregacao:
+
+- `totalProjects`: total de projetos publicados
+- `totalSchools`: quantidade de escolas distintas (normalizadas em lowercase)
+- `totalParticipants`: soma de `participantes`
+- `totalAreas`: quantidade de areas distintas (normalizadas em lowercase)
 
 ## Ajustes recentes (banner e footer)
 
@@ -76,6 +105,7 @@ Sem permissao de `footer.find`, o frontend recebe `403 Forbidden` em `/api/foote
 curl "http://127.0.0.1:1337/api/banners?populate=*"
 curl "http://127.0.0.1:1337/api/footer"
 curl "http://127.0.0.1:1337/api/public/femictec/current-event"
+curl "http://127.0.0.1:1337/api/public/femictec/stats"
 ```
 
 Esperado:
@@ -83,6 +113,7 @@ Esperado:
 - `banners`: `200` com `Imagem` preenchida.
 - `footer`: `200` (nao `403`).
 - `current-event`: `200` com objeto `data` contendo os 4 campos do contrato.
+- `stats`: `200` com objeto `data` contendo os totais agregados.
 
 ## Testes
 

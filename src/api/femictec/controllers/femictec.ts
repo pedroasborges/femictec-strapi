@@ -41,6 +41,15 @@ const resolveStatus = (submissionDeadline?: string | null) => {
   return new Date() > parsed ? 'submission_closed' : 'submission_open';
 };
 
+const normalizeText = (value: unknown): string | null => {
+  if (typeof value !== 'string') {
+    return null;
+  }
+
+  const normalized = value.trim();
+  return normalized.length > 0 ? normalized : null;
+};
+
 export default factories.createCoreController('api::femictec.femictec', ({ strapi }) => ({
   async currentEvent(ctx) {
     const feira = await strapi.entityService.findMany('api::feira.feira', {
@@ -60,6 +69,46 @@ export default factories.createCoreController('api::femictec.femictec', ({ strap
         dates,
         status,
         submissionDeadline,
+      },
+    };
+  },
+
+  async stats(ctx) {
+    const projetoUid = 'api::projeto.projeto';
+    const where = { publishedAt: { $notNull: true } };
+
+    const totalProjects = await strapi.db.query(projetoUid).count({ where });
+    const rows = await strapi.db.query(projetoUid).findMany({
+      where,
+      select: ['escola', 'area', 'participantes'],
+    });
+
+    const schools = new Set<string>();
+    const areas = new Set<string>();
+    let participants = 0;
+
+    for (const row of rows as Record<string, unknown>[]) {
+      const school = normalizeText(row.escola);
+      if (school) {
+        schools.add(school.toLowerCase());
+      }
+
+      const area = normalizeText(row.area);
+      if (area) {
+        areas.add(area.toLowerCase());
+      }
+
+      if (typeof row.participantes === 'number' && Number.isFinite(row.participantes) && row.participantes > 0) {
+        participants += row.participantes;
+      }
+    }
+
+    ctx.body = {
+      data: {
+        totalProjects,
+        totalSchools: schools.size,
+        totalParticipants: participants,
+        totalAreas: areas.size,
       },
     };
   },

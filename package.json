@@ -17,7 +17,8 @@
     "strapi": "strapi",
     "test:scripts": "node scripts/tests/run-tests.mjs",
     "test:integration:current-event": "node scripts/tests/current-event.integration.mjs",
-    "test:all": "npm run test:scripts && npm run test:integration:current-event",
+    "test:integration:stats": "node scripts/tests/stats.integration.mjs",
+    "test:all": "npm run test:scripts && npm run test:integration:current-event && npm run test:integration:stats",
     "upgrade": "npx @strapi/upgrade latest",
     "upgrade:dry": "npx @strapi/upgrade latest --dry"
   },

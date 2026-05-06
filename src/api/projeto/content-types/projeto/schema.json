@@ -16,6 +16,16 @@
     },
     "Descricao": {
       "type": "blocks"
+    },
+    "escola": {
+      "type": "string"
+    },
+    "area": {
+      "type": "string"
+    },
+    "participantes": {
+      "type": "integer",
+      "min": 1
     }
   }
 }

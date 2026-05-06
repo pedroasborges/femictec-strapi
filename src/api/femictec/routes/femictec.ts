@@ -12,5 +12,13 @@ export default {
         auth: false,
       },
     },
+    {
+      method: 'GET',
+      path: '/public/femictec/stats',
+      handler: 'femictec.stats',
+      config: {
+        auth: false,
+      },
+    },
   ],
 };
