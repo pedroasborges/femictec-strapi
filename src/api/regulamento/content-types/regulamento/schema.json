@@ -1,0 +1,37 @@
+{
+  "kind": "singleType",
+  "collectionName": "regulamentos",
+  "info": {
+    "singularName": "regulamento",
+    "pluralName": "regulamentos",
+    "displayName": "Regulamento"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "titulo": {
+      "type": "string"
+    },
+    "subtitulo": {
+      "type": "string"
+    },
+    "conteudo": {
+      "type": "text"
+    },
+    "pdfLabel": {
+      "type": "string"
+    },
+    "pdfArquivo": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    }
+  }
+}

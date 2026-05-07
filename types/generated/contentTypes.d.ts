@@ -458,6 +458,39 @@ export interface ApiBannerBanner extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiContatoContato extends Struct.SingleTypeSchema {
+  collectionName: 'contatos';
+  info: {
+    displayName: 'Contato';
+    pluralName: 'contatos';
+    singularName: 'contato';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    descricao: Schema.Attribute.Text;
+    email: Schema.Attribute.Email;
+    endereco: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::contato.contato'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    subtitulo: Schema.Attribute.String;
+    telefone: Schema.Attribute.String;
+    titulo: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiEventosFeiraEventosFeira
   extends Struct.CollectionTypeSchema {
   collectionName: 'eventos_feiras';
@@ -647,6 +680,39 @@ export interface ApiFooterFooter extends Struct.SingleTypeSchema {
   };
 }
 
+export interface ApiMensagensContatoMensagensContato
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'mensagens_contatos';
+  info: {
+    displayName: 'Mensagens Contato';
+    pluralName: 'mensagens-contatos';
+    singularName: 'mensagens-contato';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    anexo: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    assunto: Schema.Attribute.String & Schema.Attribute.Required;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    email: Schema.Attribute.Email & Schema.Attribute.Required;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::mensagens-contato.mensagens-contato'
+    > &
+      Schema.Attribute.Private;
+    mensagem: Schema.Attribute.Text & Schema.Attribute.Required;
+    nome: Schema.Attribute.String & Schema.Attribute.Required;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiNoticiaNoticia extends Struct.CollectionTypeSchema {
   collectionName: 'noticias';
   info: {
@@ -714,6 +780,40 @@ export interface ApiProjetoProjeto extends Struct.CollectionTypeSchema {
       >;
     publishedAt: Schema.Attribute.DateTime;
     Titulo: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiRegulamentoRegulamento extends Struct.SingleTypeSchema {
+  collectionName: 'regulamentos';
+  info: {
+    displayName: 'Regulamento';
+    pluralName: 'regulamentos';
+    singularName: 'regulamento';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    conteudo: Schema.Attribute.Text;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::regulamento.regulamento'
+    > &
+      Schema.Attribute.Private;
+    pdfArquivo: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
+    pdfLabel: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    subtitulo: Schema.Attribute.String;
+    titulo: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1232,12 +1332,15 @@ declare module '@strapi/strapi' {
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
       'api::banner.banner': ApiBannerBanner;
+      'api::contato.contato': ApiContatoContato;
       'api::eventos-feira.eventos-feira': ApiEventosFeiraEventosFeira;
       'api::feira.feira': ApiFeiraFeira;
       'api::femictec.femictec': ApiFemictecFemictec;
       'api::footer.footer': ApiFooterFooter;
+      'api::mensagens-contato.mensagens-contato': ApiMensagensContatoMensagensContato;
       'api::noticia.noticia': ApiNoticiaNoticia;
       'api::projeto.projeto': ApiProjetoProjeto;
+      'api::regulamento.regulamento': ApiRegulamentoRegulamento;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;
