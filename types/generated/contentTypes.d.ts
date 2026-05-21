@@ -491,6 +491,43 @@ export interface ApiContatoContato extends Struct.SingleTypeSchema {
   };
 }
 
+export interface ApiDadoInstitucionalDadoInstitucional
+  extends Struct.SingleTypeSchema {
+  collectionName: 'dado_institucionals';
+  info: {
+    displayName: 'DadoInstitucional';
+    pluralName: 'dado-institucionals';
+    singularName: 'dado-institucional';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    dataLimite: Schema.Attribute.Date;
+    imagemEstudanteUrl: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
+    linkPlataforma: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::dado-institucional.dado-institucional'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    textoInscricao: Schema.Attribute.Text;
+    textoResumo: Schema.Attribute.Text;
+    tituloResumo: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    urlVideo: Schema.Attribute.String;
+  };
+}
+
 export interface ApiEventosFeiraEventosFeira
   extends Struct.CollectionTypeSchema {
   collectionName: 'eventos_feiras';
@@ -1333,6 +1370,7 @@ declare module '@strapi/strapi' {
       'admin::user': AdminUser;
       'api::banner.banner': ApiBannerBanner;
       'api::contato.contato': ApiContatoContato;
+      'api::dado-institucional.dado-institucional': ApiDadoInstitucionalDadoInstitucional;
       'api::eventos-feira.eventos-feira': ApiEventosFeiraEventosFeira;
       'api::feira.feira': ApiFeiraFeira;
       'api::femictec.femictec': ApiFemictecFemictec;
