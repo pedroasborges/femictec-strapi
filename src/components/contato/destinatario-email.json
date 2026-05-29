@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_contato_destinatario_emails",
+  "info": {
+    "displayName": "destinatario-email"
+  },
+  "options": {},
+  "attributes": {
+    "nome": {
+      "type": "string"
+    },
+    "email": {
+      "type": "email"
+    }
+  },
+  "config": {}
+}

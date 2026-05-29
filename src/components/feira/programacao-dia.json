@@ -13,8 +13,8 @@
     },
     "atividades": {
       "type": "component",
-      "component": "atividade-item.atividades",
-      "repeatable": false
+      "component": "feira.atividade-item",
+      "repeatable": true
     }
   },
   "config": {}

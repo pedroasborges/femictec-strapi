@@ -28,6 +28,23 @@
     },
     "endereco": {
       "type": "string"
+    },
+    "destinatariosEvento": {
+      "type": "component",
+      "component": "contato.destinatario-email",
+      "repeatable": true
+    },
+    "notificacaoAssuntoTemplate": {
+      "type": "string"
+    },
+    "notificacaoMensagemTemplate": {
+      "type": "text"
+    },
+    "confirmacaoAssuntoTemplate": {
+      "type": "string"
+    },
+    "confirmacaoMensagemTemplate": {
+      "type": "text"
     }
   }
 }

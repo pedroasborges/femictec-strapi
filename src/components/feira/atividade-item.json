@@ -5,7 +5,7 @@
   },
   "options": {},
   "attributes": {
-    "hotario": {
+    "horario": {
       "type": "string"
     },
     "titulo": {

@@ -50,17 +50,64 @@ const normalizeText = (value: unknown): string | null => {
   return normalized.length > 0 ? normalized : null;
 };
 
+const extractSubmissionDeadline = (items: unknown): string | null => {
+  if (!Array.isArray(items)) {
+    return null;
+  }
+
+  const parsedItems = items.filter(
+    (item): item is { atividade?: unknown; data?: unknown } =>
+      typeof item === 'object' && item !== null
+  );
+
+  if (parsedItems.length === 0) {
+    return null;
+  }
+
+  const preferred = parsedItems.find((item) => {
+    const activity = normalizeText(item.atividade);
+    if (!activity) {
+      return false;
+    }
+
+    const normalized = activity.toLowerCase();
+    return normalized.includes('inscri') || normalized.includes('submiss');
+  });
+
+  return normalizeText(preferred?.data) ?? normalizeText(parsedItems[0].data);
+};
+
 export default factories.createCoreController('api::femictec.femictec', ({ strapi }) => ({
   async currentEvent(ctx) {
     const feira = await strapi.entityService.findMany('api::feira.feira', {
-      fields: ['edicaoTitulo', 'dataRealizacao', 'cronogramaItens'],
+      populate: {
+        visaoGeral: {
+          fields: ['edicaoTitulo'],
+        },
+        cronograma: {
+          fields: ['dataRealizacao'],
+          populate: {
+            cronogramaItens: {
+              fields: ['atividade', 'data'],
+            },
+          },
+        },
+      },
       publicationState: 'live',
       limit: 1,
     });
 
-    const activeEdition = feira?.edicaoTitulo ?? null;
-    const dates = feira?.dataRealizacao ?? null;
-    const submissionDeadline = feira?.cronogramaItens ?? null;
+    const feiraData = feira as {
+      visaoGeral?: { edicaoTitulo?: string | null } | null;
+      cronograma?: {
+        dataRealizacao?: string | null;
+        cronogramaItens?: unknown;
+      } | null;
+    } | null;
+
+    const activeEdition = feiraData?.visaoGeral?.edicaoTitulo ?? null;
+    const dates = feiraData?.cronograma?.dataRealizacao ?? null;
+    const submissionDeadline = extractSubmissionDeadline(feiraData?.cronograma?.cronogramaItens);
     const status = resolveStatus(submissionDeadline);
 
     ctx.body = {

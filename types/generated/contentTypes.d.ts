@@ -469,10 +469,16 @@ export interface ApiContatoContato extends Struct.SingleTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    confirmacaoAssuntoTemplate: Schema.Attribute.String;
+    confirmacaoMensagemTemplate: Schema.Attribute.Text;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     descricao: Schema.Attribute.Text;
+    destinatariosEvento: Schema.Attribute.Component<
+      'contato.destinatario-email',
+      true
+    >;
     email: Schema.Attribute.Email;
     endereco: Schema.Attribute.String;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
@@ -481,6 +487,8 @@ export interface ApiContatoContato extends Struct.SingleTypeSchema {
       'api::contato.contato'
     > &
       Schema.Attribute.Private;
+    notificacaoAssuntoTemplate: Schema.Attribute.String;
+    notificacaoMensagemTemplate: Schema.Attribute.Text;
     publishedAt: Schema.Attribute.DateTime;
     subtitulo: Schema.Attribute.String;
     telefone: Schema.Attribute.String;
@@ -578,33 +586,16 @@ export interface ApiFeiraFeira extends Struct.SingleTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    cronogramaItens: Schema.Attribute.String;
-    cronogramaTitulo: Schema.Attribute.String;
-    dataRealizacao: Schema.Attribute.String;
-    edicaoDescricao: Schema.Attribute.Text;
-    edicaoTitulo: Schema.Attribute.String;
+    cronograma: Schema.Attribute.Component<'feira.cronograma', false>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::feira.feira'> &
       Schema.Attribute.Private;
-    mapaImagem: Schema.Attribute.Media<
-      'images' | 'files' | 'videos' | 'audios'
-    >;
-    mapaImagemAlt: Schema.Attribute.String;
-    objetivosDescricao: Schema.Attribute.Text;
-    objetivosTitulo: Schema.Attribute.String;
-    programacaoDias: Schema.Attribute.String;
-    programacaoTitulo: Schema.Attribute.String;
+    programacao: Schema.Attribute.Component<'feira.programacao', false>;
     publishedAt: Schema.Attribute.DateTime;
-    regulamentoLabel: Schema.Attribute.String;
-    regulamentoTitulo: Schema.Attribute.String;
-    regulamentoUrl: Schema.Attribute.String;
-    tematicaImagem: Schema.Attribute.Media<
-      'images' | 'files' | 'videos' | 'audios'
-    >;
-    tematicaImagemAlt: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    visaoGeral: Schema.Attribute.Component<'feira.visao-geral', false>;
   };
 }
 
@@ -619,68 +610,20 @@ export interface ApiFemictecFemictec extends Struct.SingleTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    bannerDestaque: Schema.Attribute.String;
-    bannerImagem: Schema.Attribute.Media<
-      'images' | 'files' | 'videos' | 'audios'
-    >;
-    bannerTitulo: Schema.Attribute.String;
-    comissaoDescricao: Schema.Attribute.Text;
-    comissaoTitulo: Schema.Attribute.String;
+    apresentacao: Schema.Attribute.Component<'femictec.apresentacao', false>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    edicoesCards: Schema.Attribute.Component<
-      'edicao-card.edicoes-cards',
-      false
-    >;
-    estandesImagem: Schema.Attribute.Media<
-      'images' | 'files' | 'videos' | 'audios'
-    >;
-    estandesImagemAlt: Schema.Attribute.String;
-    estandesSubtitulo: Schema.Attribute.String;
-    estandesTitulo: Schema.Attribute.String;
-    galeriaLabel: Schema.Attribute.String;
-    galeriaUrl: Schema.Attribute.String;
-    historicoDescricao: Schema.Attribute.Text;
-    historicoTabelaLinhas: Schema.Attribute.Component<
-      'historico-linha.historico-tabela-linhas',
-      false
-    >;
-    historicoTabelaTitulo: Schema.Attribute.String;
-    historicoTitulo: Schema.Attribute.String;
-    imagemEntrada: Schema.Attribute.Media<
-      'images' | 'files' | 'videos' | 'audios'
-    >;
-    imagemEntradaAlt: Schema.Attribute.String;
-    imagemEntradaLabel: Schema.Attribute.String;
-    impactoDescricao: Schema.Attribute.Text;
-    impactoTitulo: Schema.Attribute.String;
+    historico: Schema.Attribute.Component<'femictec.historico', false>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::femictec.femictec'
     > &
       Schema.Attribute.Private;
-    menuItemHistoricoLabel: Schema.Attribute.String;
-    menuItemInicioLabel: Schema.Attribute.String;
-    menuItemQuemRealizaLabel: Schema.Attribute.String;
-    missaoDescricao: Schema.Attribute.Text;
-    missaoDestaque: Schema.Attribute.String;
-    missaoTitulo: Schema.Attribute.String;
-    oQueDescricao: Schema.Attribute.Text;
-    oQueTitulo: Schema.Attribute.String;
-    organizacaoDescricao: Schema.Attribute.Text;
-    organizacaoTitulo: Schema.Attribute.String;
-    parceiros: Schema.Attribute.Component<'parceiro-item.parceiros', false>;
-    parceirosTitulo: Schema.Attribute.String;
+    menuInterno: Schema.Attribute.Component<'femictec.menu-interno', false>;
     publishedAt: Schema.Attribute.DateTime;
-    quemRealizaTitulo: Schema.Attribute.String;
-    trajetoriaImagem: Schema.Attribute.Media<
-      'images' | 'files' | 'videos' | 'audios'
-    >;
-    trajetoriaImagemAlt: Schema.Attribute.String;
-    trajetoriaSubtitulo: Schema.Attribute.String;
-    trajetoriaTitulo: Schema.Attribute.String;
+    quemRealiza: Schema.Attribute.Component<'femictec.quem-realiza', false>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;

@@ -11,68 +11,20 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "edicaoTitulo": {
-      "type": "string"
+    "visaoGeral": {
+      "type": "component",
+      "component": "feira.visao-geral",
+      "repeatable": false
     },
-    "edicaoDescricao": {
-      "type": "text"
+    "cronograma": {
+      "type": "component",
+      "component": "feira.cronograma",
+      "repeatable": false
     },
-    "tematicaImagem": {
-      "type": "media",
-      "multiple": false,
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ]
-    },
-    "tematicaImagemAlt": {
-      "type": "string"
-    },
-    "objetivosTitulo": {
-      "type": "string"
-    },
-    "objetivosDescricao": {
-      "type": "text"
-    },
-    "regulamentoTitulo": {
-      "type": "string"
-    },
-    "regulamentoLabel": {
-      "type": "string"
-    },
-    "regulamentoUrl": {
-      "type": "string"
-    },
-    "cronogramaTitulo": {
-      "type": "string"
-    },
-    "dataRealizacao": {
-      "type": "string"
-    },
-    "cronogramaItens": {
-      "type": "string"
-    },
-    "mapaImagem": {
-      "type": "media",
-      "multiple": false,
-      "required": false,
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ]
-    },
-    "mapaImagemAlt": {
-      "type": "string"
-    },
-    "programacaoTitulo": {
-      "type": "string"
-    },
-    "programacaoDias": {
-      "type": "string"
+    "programacao": {
+      "type": "component",
+      "component": "feira.programacao",
+      "repeatable": false
     }
   }
 }

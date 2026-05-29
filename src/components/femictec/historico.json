@@ -1,0 +1,51 @@
+{
+  "collectionName": "components_femictec_historicos",
+  "info": {
+    "displayName": "historico"
+  },
+  "options": {},
+  "attributes": {
+    "historicoTitulo": {
+      "type": "string"
+    },
+    "historicoDescricao": {
+      "type": "text"
+    },
+    "trajetoriaTitulo": {
+      "type": "string"
+    },
+    "trajetoriaSubtitulo": {
+      "type": "string"
+    },
+    "trajetoriaImagem": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "trajetoriaImagemAlt": {
+      "type": "string"
+    },
+    "edicoesCards": {
+      "type": "component",
+      "component": "femictec.edicao-card",
+      "repeatable": true
+    },
+    "galeriaLabel": {
+      "type": "string"
+    },
+    "galeriaUrl": {
+      "type": "string"
+    },
+    "historicoTabelaTitulo": {
+      "type": "string"
+    },
+    "historicoTabelaLinhas": {
+      "type": "component",
+      "component": "femictec.historico-linha",
+      "repeatable": true
+    }
+  },
+  "config": {}
+}

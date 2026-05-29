@@ -1,0 +1,31 @@
+{
+  "collectionName": "components_feira_cronogramas",
+  "info": {
+    "displayName": "cronograma"
+  },
+  "options": {},
+  "attributes": {
+    "cronogramaTitulo": {
+      "type": "string"
+    },
+    "dataRealizacao": {
+      "type": "string"
+    },
+    "cronogramaItens": {
+      "type": "component",
+      "component": "feira.cronograma-item",
+      "repeatable": true
+    },
+    "mapaImagem": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "mapaImagemAlt": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}

@@ -1,0 +1,41 @@
+{
+  "collectionName": "components_feira_visao_gerals",
+  "info": {
+    "displayName": "visao-geral"
+  },
+  "options": {},
+  "attributes": {
+    "edicaoTitulo": {
+      "type": "string"
+    },
+    "edicaoDescricao": {
+      "type": "text"
+    },
+    "tematicaImagem": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "tematicaImagemAlt": {
+      "type": "string"
+    },
+    "objetivosTitulo": {
+      "type": "string"
+    },
+    "objetivosDescricao": {
+      "type": "text"
+    },
+    "regulamentoTitulo": {
+      "type": "string"
+    },
+    "regulamentoLabel": {
+      "type": "string"
+    },
+    "regulamentoUrl": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}

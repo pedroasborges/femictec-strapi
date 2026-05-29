@@ -11,152 +11,24 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "menuItemInicioLabel": {
-      "type": "string"
-    },
-    "menuItemQuemRealizaLabel": {
-      "type": "string"
-    },
-    "menuItemHistoricoLabel": {
-      "type": "string"
-    },
-    "bannerTitulo": {
-      "type": "string"
-    },
-    "bannerImagem": {
-      "type": "media",
-      "multiple": false,
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ]
-    },
-    "bannerDestaque": {
-      "type": "string"
-    },
-    "oQueTitulo": {
-      "type": "string"
-    },
-    "oQueDescricao": {
-      "type": "text"
-    },
-    "missaoTitulo": {
-      "type": "string"
-    },
-    "missaoDescricao": {
-      "type": "text"
-    },
-    "missaoDestaque": {
-      "type": "string"
-    },
-    "impactoTitulo": {
-      "type": "string"
-    },
-    "impactoDescricao": {
-      "type": "text"
-    },
-    "estandesTitulo": {
-      "type": "string"
-    },
-    "estandesSubtitulo": {
-      "type": "string"
-    },
-    "estandesImagem": {
-      "type": "media",
-      "multiple": false,
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ]
-    },
-    "estandesImagemAlt": {
-      "type": "string"
-    },
-    "quemRealizaTitulo": {
-      "type": "string"
-    },
-    "organizacaoTitulo": {
-      "type": "string"
-    },
-    "organizacaoDescricao": {
-      "type": "text"
-    },
-    "comissaoTitulo": {
-      "type": "string"
-    },
-    "comissaoDescricao": {
-      "type": "text"
-    },
-    "imagemEntrada": {
-      "type": "media",
-      "multiple": false,
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ]
-    },
-    "imagemEntradaAlt": {
-      "type": "string"
-    },
-    "imagemEntradaLabel": {
-      "type": "string"
-    },
-    "parceirosTitulo": {
-      "type": "string"
-    },
-    "parceiros": {
+    "menuInterno": {
       "type": "component",
-      "component": "parceiro-item.parceiros",
+      "component": "femictec.menu-interno",
       "repeatable": false
     },
-    "historicoTitulo": {
-      "type": "string"
-    },
-    "historicoDescricao": {
-      "type": "text"
-    },
-    "trajetoriaTitulo": {
-      "type": "string"
-    },
-    "trajetoriaSubtitulo": {
-      "type": "string"
-    },
-    "trajetoriaImagem": {
-      "type": "media",
-      "multiple": false,
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ]
-    },
-    "trajetoriaImagemAlt": {
-      "type": "string"
-    },
-    "edicoesCards": {
+    "apresentacao": {
       "type": "component",
-      "component": "edicao-card.edicoes-cards",
+      "component": "femictec.apresentacao",
       "repeatable": false
     },
-    "galeriaLabel": {
-      "type": "string"
-    },
-    "galeriaUrl": {
-      "type": "string"
-    },
-    "historicoTabelaTitulo": {
-      "type": "string"
-    },
-    "historicoTabelaLinhas": {
+    "quemRealiza": {
       "type": "component",
-      "component": "historico-linha.historico-tabela-linhas",
+      "component": "femictec.quem-realiza",
+      "repeatable": false
+    },
+    "historico": {
+      "type": "component",
+      "component": "femictec.historico",
       "repeatable": false
     }
   }
