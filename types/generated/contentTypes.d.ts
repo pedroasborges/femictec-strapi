@@ -759,6 +759,38 @@ export interface ApiNoticiaNoticia extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiPoliticaDePrivacidadePoliticaDePrivacidade
+  extends Struct.SingleTypeSchema {
+  collectionName: 'politica_de_privacidades';
+  info: {
+    displayName: 'Pol\u00EDtica de Privacidade';
+    pluralName: 'politica-de-privacidades';
+    singularName: 'politica-de-privacidade';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    atualizadoEm: Schema.Attribute.String;
+    conteudo: Schema.Attribute.Text;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::politica-de-privacidade.politica-de-privacidade'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    subtitulo: Schema.Attribute.String;
+    titulo: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiProjetoProjeto extends Struct.CollectionTypeSchema {
   collectionName: 'projetos';
   info: {
@@ -1352,6 +1384,7 @@ declare module '@strapi/strapi' {
       'api::localizacao.localizacao': ApiLocalizacaoLocalizacao;
       'api::mensagens-contato.mensagens-contato': ApiMensagensContatoMensagensContato;
       'api::noticia.noticia': ApiNoticiaNoticia;
+      'api::politica-de-privacidade.politica-de-privacidade': ApiPoliticaDePrivacidadePoliticaDePrivacidade;
       'api::projeto.projeto': ApiProjetoProjeto;
       'api::regulamento.regulamento': ApiRegulamentoRegulamento;
       'plugin::content-releases.release': PluginContentReleasesRelease;
