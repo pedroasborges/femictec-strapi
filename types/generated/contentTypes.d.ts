@@ -645,6 +645,7 @@ export interface ApiFooterFooter extends Struct.SingleTypeSchema {
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     Email: Schema.Attribute.Email;
+    Facebook: Schema.Attribute.String;
     Instagram: Schema.Attribute.String;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
@@ -657,6 +658,7 @@ export interface ApiFooterFooter extends Struct.SingleTypeSchema {
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    Youtube: Schema.Attribute.String;
   };
 }
 
@@ -785,44 +787,6 @@ export interface ApiPoliticaDePrivacidadePoliticaDePrivacidade
     publishedAt: Schema.Attribute.DateTime;
     subtitulo: Schema.Attribute.String;
     titulo: Schema.Attribute.String;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-  };
-}
-
-export interface ApiProjetoProjeto extends Struct.CollectionTypeSchema {
-  collectionName: 'projetos';
-  info: {
-    displayName: 'Projeto';
-    pluralName: 'projetos';
-    singularName: 'projeto';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    area: Schema.Attribute.String;
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    Descricao: Schema.Attribute.Blocks;
-    escola: Schema.Attribute.String;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::projeto.projeto'
-    > &
-      Schema.Attribute.Private;
-    participantes: Schema.Attribute.Integer &
-      Schema.Attribute.SetMinMax<
-        {
-          min: 1;
-        },
-        number
-      >;
-    publishedAt: Schema.Attribute.DateTime;
-    Titulo: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1385,7 +1349,6 @@ declare module '@strapi/strapi' {
       'api::mensagens-contato.mensagens-contato': ApiMensagensContatoMensagensContato;
       'api::noticia.noticia': ApiNoticiaNoticia;
       'api::politica-de-privacidade.politica-de-privacidade': ApiPoliticaDePrivacidadePoliticaDePrivacidade;
-      'api::projeto.projeto': ApiProjetoProjeto;
       'api::regulamento.regulamento': ApiRegulamentoRegulamento;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;

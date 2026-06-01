@@ -19,6 +19,12 @@
     },
     "Instagram": {
       "type": "string"
+    },
+    "Facebook": {
+      "type": "string"
+    },
+    "Youtube": {
+      "type": "string"
     }
   }
 }
