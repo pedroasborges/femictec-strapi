@@ -536,6 +536,42 @@ export interface ApiDadoInstitucionalDadoInstitucional
   };
 }
 
+export interface ApiEdicaoGaleriaEdicaoGaleria
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'edicao_galerias';
+  info: {
+    displayName: 'Edi\u00E7\u00E3o Galeria';
+    pluralName: 'edicao-galerias';
+    singularName: 'edicao-galeria';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    dataEdicao: Schema.Attribute.Date & Schema.Attribute.Required;
+    imagens: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios',
+      true
+    > &
+      Schema.Attribute.Required;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::edicao-galeria.edicao-galeria'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    slug: Schema.Attribute.UID<'tituloEdicao'> & Schema.Attribute.Required;
+    tituloEdicao: Schema.Attribute.String & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiEventosFeiraEventosFeira
   extends Struct.CollectionTypeSchema {
   collectionName: 'eventos_feiras';
@@ -1341,6 +1377,7 @@ declare module '@strapi/strapi' {
       'api::banner.banner': ApiBannerBanner;
       'api::contato.contato': ApiContatoContato;
       'api::dado-institucional.dado-institucional': ApiDadoInstitucionalDadoInstitucional;
+      'api::edicao-galeria.edicao-galeria': ApiEdicaoGaleriaEdicaoGaleria;
       'api::eventos-feira.eventos-feira': ApiEventosFeiraEventosFeira;
       'api::feira.feira': ApiFeiraFeira;
       'api::femictec.femictec': ApiFemictecFemictec;

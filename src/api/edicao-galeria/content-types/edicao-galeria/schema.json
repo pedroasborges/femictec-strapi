@@ -1,0 +1,39 @@
+{
+  "kind": "collectionType",
+  "collectionName": "edicao_galerias",
+  "info": {
+    "singularName": "edicao-galeria",
+    "pluralName": "edicao-galerias",
+    "displayName": "Edição Galeria"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "tituloEdicao": {
+      "type": "string",
+      "required": true
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "tituloEdicao",
+      "required": true
+    },
+    "dataEdicao": {
+      "type": "date",
+      "required": true
+    },
+    "imagens": {
+      "type": "media",
+      "multiple": true,
+      "required": true,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    }
+  }
+}
