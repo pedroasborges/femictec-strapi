@@ -660,6 +660,37 @@ export interface ApiFooterFooter extends Struct.SingleTypeSchema {
   };
 }
 
+export interface ApiLocalizacaoLocalizacao extends Struct.SingleTypeSchema {
+  collectionName: 'localizacaos';
+  info: {
+    displayName: 'Localizacao';
+    pluralName: 'localizacaos';
+    singularName: 'localizacao';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    coordenadas: Schema.Attribute.String;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    descricao: Schema.Attribute.Text;
+    endereco: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::localizacao.localizacao'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    titulo: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiMensagensContatoMensagensContato
   extends Struct.CollectionTypeSchema {
   collectionName: 'mensagens_contatos';
@@ -1318,6 +1349,7 @@ declare module '@strapi/strapi' {
       'api::feira.feira': ApiFeiraFeira;
       'api::femictec.femictec': ApiFemictecFemictec;
       'api::footer.footer': ApiFooterFooter;
+      'api::localizacao.localizacao': ApiLocalizacaoLocalizacao;
       'api::mensagens-contato.mensagens-contato': ApiMensagensContatoMensagensContato;
       'api::noticia.noticia': ApiNoticiaNoticia;
       'api::projeto.projeto': ApiProjetoProjeto;

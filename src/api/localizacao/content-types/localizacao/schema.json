@@ -1,0 +1,27 @@
+{
+  "kind": "singleType",
+  "collectionName": "localizacaos",
+  "info": {
+    "singularName": "localizacao",
+    "pluralName": "localizacaos",
+    "displayName": "Localizacao"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "titulo": {
+      "type": "string"
+    },
+    "descricao": {
+      "type": "text"
+    },
+    "endereco": {
+      "type": "string"
+    },
+    "coordenadas": {
+      "type": "string"
+    }
+  }
+}
