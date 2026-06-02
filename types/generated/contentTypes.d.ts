@@ -608,6 +608,33 @@ export interface ApiEventosFeiraEventosFeira
   };
 }
 
+export interface ApiFaqFaq extends Struct.SingleTypeSchema {
+  collectionName: 'faqs';
+  info: {
+    displayName: 'Perguntas Frequentes';
+    pluralName: 'faqs';
+    singularName: 'faq';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::faq.faq'> &
+      Schema.Attribute.Private;
+    perguntas: Schema.Attribute.Component<'faq.pergunta-faq', true>;
+    publishedAt: Schema.Attribute.DateTime;
+    subtitulo: Schema.Attribute.String;
+    titulo: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiFeiraFeira extends Struct.SingleTypeSchema {
   collectionName: 'feiras';
   info: {
@@ -1476,6 +1503,7 @@ declare module '@strapi/strapi' {
       'api::dado-institucional.dado-institucional': ApiDadoInstitucionalDadoInstitucional;
       'api::edicao-galeria.edicao-galeria': ApiEdicaoGaleriaEdicaoGaleria;
       'api::eventos-feira.eventos-feira': ApiEventosFeiraEventosFeira;
+      'api::faq.faq': ApiFaqFaq;
       'api::feira.feira': ApiFeiraFeira;
       'api::femictec.femictec': ApiFemictecFemictec;
       'api::footer.footer': ApiFooterFooter;

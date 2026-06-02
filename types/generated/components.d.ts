@@ -27,6 +27,17 @@ export interface EdicaoCardEdicoesCards extends Struct.ComponentSchema {
   attributes: {};
 }
 
+export interface FaqPerguntaFaq extends Struct.ComponentSchema {
+  collectionName: 'components_faq_perguntas';
+  info: {
+    displayName: 'Pergunta FAQ';
+  };
+  attributes: {
+    pergunta: Schema.Attribute.String;
+    resposta: Schema.Attribute.Text;
+  };
+}
+
 export interface FeiraAtividadeItem extends Struct.ComponentSchema {
   collectionName: 'components_feira_atividade_items';
   info: {
@@ -241,6 +252,7 @@ declare module '@strapi/strapi' {
       'atividade-item.atividades': AtividadeItemAtividades;
       'contato.destinatario-email': ContatoDestinatarioEmail;
       'edicao-card.edicoes-cards': EdicaoCardEdicoesCards;
+      'faq.pergunta-faq': FaqPerguntaFaq;
       'feira.atividade-item': FeiraAtividadeItem;
       'feira.cronograma': FeiraCronograma;
       'feira.cronograma-item': FeiraCronogramaItem;
