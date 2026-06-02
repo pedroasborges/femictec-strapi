@@ -698,6 +698,40 @@ export interface ApiFooterFooter extends Struct.SingleTypeSchema {
   };
 }
 
+export interface ApiHomeDataHomeData extends Struct.SingleTypeSchema {
+  collectionName: 'home_datas';
+  info: {
+    displayName: 'Datas da Home';
+    pluralName: 'home-datas';
+    singularName: 'home-data';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    etapa1Data: Schema.Attribute.String;
+    etapa1Titulo: Schema.Attribute.String;
+    etapa2Data: Schema.Attribute.String;
+    etapa2Titulo: Schema.Attribute.String;
+    etapa3Data: Schema.Attribute.String;
+    etapa3Titulo: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::home-data.home-data'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    tituloSecao: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiLocalizacaoLocalizacao extends Struct.SingleTypeSchema {
   collectionName: 'localizacaos';
   info: {
@@ -755,6 +789,38 @@ export interface ApiMensagensContatoMensagensContato
       Schema.Attribute.Private;
     mensagem: Schema.Attribute.Text & Schema.Attribute.Required;
     nome: Schema.Attribute.String & Schema.Attribute.Required;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiNavbarNavbar extends Struct.SingleTypeSchema {
+  collectionName: 'navbars';
+  info: {
+    displayName: 'Navbar';
+    pluralName: 'navbars';
+    singularName: 'navbar';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::navbar.navbar'
+    > &
+      Schema.Attribute.Private;
+    logo: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios',
+      true
+    >;
+    logoAlt: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -1413,8 +1479,10 @@ declare module '@strapi/strapi' {
       'api::feira.feira': ApiFeiraFeira;
       'api::femictec.femictec': ApiFemictecFemictec;
       'api::footer.footer': ApiFooterFooter;
+      'api::home-data.home-data': ApiHomeDataHomeData;
       'api::localizacao.localizacao': ApiLocalizacaoLocalizacao;
       'api::mensagens-contato.mensagens-contato': ApiMensagensContatoMensagensContato;
+      'api::navbar.navbar': ApiNavbarNavbar;
       'api::noticia.noticia': ApiNoticiaNoticia;
       'api::politica-de-privacidade.politica-de-privacidade': ApiPoliticaDePrivacidadePoliticaDePrivacidade;
       'api::regulamento.regulamento': ApiRegulamentoRegulamento;

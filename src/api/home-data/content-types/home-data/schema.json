@@ -1,0 +1,36 @@
+{
+  "kind": "singleType",
+  "collectionName": "home_datas",
+  "info": {
+    "singularName": "home-data",
+    "pluralName": "home-datas",
+    "displayName": "Datas da Home"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "tituloSecao": {
+      "type": "string"
+    },
+    "etapa1Titulo": {
+      "type": "string"
+    },
+    "etapa1Data": {
+      "type": "string"
+    },
+    "etapa2Titulo": {
+      "type": "string"
+    },
+    "etapa2Data": {
+      "type": "string"
+    },
+    "etapa3Titulo": {
+      "type": "string"
+    },
+    "etapa3Data": {
+      "type": "string"
+    }
+  }
+}
