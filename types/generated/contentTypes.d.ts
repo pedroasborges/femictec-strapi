@@ -863,6 +863,37 @@ export interface ApiRegulamentoRegulamento extends Struct.SingleTypeSchema {
   };
 }
 
+export interface ApiTermoDeUsoTermoDeUso extends Struct.SingleTypeSchema {
+  collectionName: 'termo_de_usos';
+  info: {
+    displayName: 'Termo de Uso';
+    pluralName: 'termo-de-usos';
+    singularName: 'termo-de-uso';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    atualizadoEm: Schema.Attribute.String;
+    conteudo: Schema.Attribute.Text;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::termo-de-uso.termo-de-uso'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    subtitulo: Schema.Attribute.String;
+    titulo: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface PluginContentReleasesRelease
   extends Struct.CollectionTypeSchema {
   collectionName: 'strapi_releases';
@@ -1387,6 +1418,7 @@ declare module '@strapi/strapi' {
       'api::noticia.noticia': ApiNoticiaNoticia;
       'api::politica-de-privacidade.politica-de-privacidade': ApiPoliticaDePrivacidadePoliticaDePrivacidade;
       'api::regulamento.regulamento': ApiRegulamentoRegulamento;
+      'api::termo-de-uso.termo-de-uso': ApiTermoDeUsoTermoDeUso;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;
