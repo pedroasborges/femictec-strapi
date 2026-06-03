@@ -43,7 +43,7 @@ Sempre que houver componentes repetiveis, preencha um bloco por vez.
 Exemplos:
 
 - `Feira` tem `visaoGeral`, `cronograma` e `programacao`;
-- `PÃ¡gina - FEMICTEC` tem `menuInterno`, `apresentacao`, `quemRealiza` e `historico`;
+- `Página - FEMICTEC` tem `menuInterno`, `apresentacao`, `quemRealiza` e `historico`;
 - `FAQ` tem uma lista de `perguntas`;
 - `Contato` tem varios `destinatariosEvento`.
 
