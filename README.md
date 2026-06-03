@@ -169,3 +169,10 @@ Observacao:
 ## Deploy com Docker
 
 Veja o guia completo em [DEPLOY-DOCKER.md](./DEPLOY-DOCKER.md).
+
+## Documentacao de uso
+
+Para orientacao de edicao e operacao do CMS, consulte:
+
+- [Guia de Usabilidade do Strapi](./docs/USABILIDADE-STRAPI.md)
+- [Registro de Testes Operacionais](./docs/OPERACOES-STRAPI.md)

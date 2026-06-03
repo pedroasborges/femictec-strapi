@@ -122,9 +122,23 @@ export default factories.createCoreController('api::femictec.femictec', ({ strap
 
   async stats(ctx) {
     const projetoUid = 'api::projeto.projeto';
-    const where = { publishedAt: { $notNull: true } };
+    const contentTypes = (strapi as typeof strapi & {
+      contentTypes?: Record<string, unknown>;
+    }).contentTypes;
 
-    const totalProjects = await strapi.db.query(projetoUid).count({ where });
+    if (!contentTypes?.[projetoUid]) {
+      ctx.body = {
+        data: {
+          totalProjects: 0,
+          totalSchools: 0,
+          totalParticipants: 0,
+          totalAreas: 0,
+        },
+      };
+      return;
+    }
+
+    const where = { publishedAt: { $notNull: true } };
     const rows = await strapi.db.query(projetoUid).findMany({
       where,
       select: ['escola', 'area', 'participantes'],
@@ -152,7 +166,7 @@ export default factories.createCoreController('api::femictec.femictec', ({ strap
 
     ctx.body = {
       data: {
-        totalProjects,
+        totalProjects: rows.length,
         totalSchools: schools.size,
         totalParticipants: participants,
         totalAreas: areas.size,
