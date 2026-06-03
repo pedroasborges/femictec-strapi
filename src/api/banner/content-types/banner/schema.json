@@ -4,7 +4,7 @@
   "info": {
     "singularName": "banner",
     "pluralName": "banners",
-    "displayName": "Banner"
+    "displayName": "Home - Banner"
   },
   "options": {
     "draftAndPublish": false
@@ -20,3 +20,4 @@
     }
   }
 }
+

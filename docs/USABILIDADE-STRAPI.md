@@ -17,7 +17,7 @@ O modelo foi desenhado para dividir o conteudo em partes pequenas e previsiveis,
 
 Na pratica, a plataforma e organizada em quatro padroes:
 
-- `single types`: paginas unicas, como `Feira`, `Footer`, `Home` e `Contato`;
+- `single types`: paginas unicas, como `Feira`, `Home` e `Contato`, e blocos globais como `Navbar` e `Footer`;
 - `collection types`: listas, como noticias, eventos e galerias;
 - `components`: blocos de formulario agrupados por tema;
 - `public APIs`: rotas de leitura que o frontend consome diretamente.
@@ -43,7 +43,7 @@ Sempre que houver componentes repetiveis, preencha um bloco por vez.
 Exemplos:
 
 - `Feira` tem `visaoGeral`, `cronograma` e `programacao`;
-- `Femictec` tem `menuInterno`, `apresentacao`, `quemRealiza` e `historico`;
+- `PÃ¡gina - FEMICTEC` tem `menuInterno`, `apresentacao`, `quemRealiza` e `historico`;
 - `FAQ` tem uma lista de `perguntas`;
 - `Contato` tem varios `destinatariosEvento`.
 
@@ -66,7 +66,7 @@ Se `draftAndPublish` estiver ativo, o conteudo precisa ser publicado para aparec
 
 Conteudo principal:
 
-- `Datas da Home`
+- `Home - Datas`
 
 Como editar:
 
@@ -108,7 +108,7 @@ Boa pratica:
 
 Conteudo principal:
 
-- `Femictec`
+- Página - FEMICTEC
 
 Componentes:
 
@@ -175,11 +175,11 @@ Boa pratica:
 
 Conteudos comuns:
 
-- `Banner`
-- `Footer`
-- `Navbar`
+- `Home - Banner`
+- `Global - Footer`
+- `Global - Navbar`
 - `Localizacao`
-- `Dado Institucional`
+- `Home - Dado Institucional`
 - `Termo de Uso`
 - `Regulamento`
 - `Politica de Privacidade`
@@ -237,3 +237,6 @@ Boa pratica:
 ## Testes operacionais desta analise
 
 Veja o registro executado em [docs/OPERACOES-STRAPI.md](./OPERACOES-STRAPI.md).
+
+
+

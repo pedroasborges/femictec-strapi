@@ -53,24 +53,24 @@ No desenvolvimento, o projeto usa `sqlite` por padrao. Em producao, o padrao e `
 
 ### APIs de conteudo
 
-- `Banner` - collection type - endpoint `/api/banners`
+- `Home - Banner` - collection type - endpoint `/api/banners`
 - `Feira` - single type - endpoint `/api/feira`
-- `Footer` - single type - endpoint `/api/footer`
-- `Datas da Home` - single type - endpoint `/api/home-data`
+- `Global - Footer` - single type - endpoint `/api/footer`
+- `Home - Datas` - single type - endpoint `/api/home-data`
 - `Eventos_Feira` - collection type - endpoint `/api/eventos-feiras`
 - `Noticia` - collection type - endpoint `/api/noticias`
 - `Termo de Uso` - single type - endpoint `/api/termo-de-uso`
 - `Regulamento` - single type - endpoint `/api/regulamento`
 - `Politica de Privacidade` - single type - endpoint `/api/politica-de-privacidade`
 - `Localizacao` - single type - endpoint `/api/localizacao`
-- `Dado Institucional` - single type - endpoint `/api/dado-institucional`
+- `Home - Dado Institucional` - single type - endpoint `/api/dado-institucional`
 - `Contato` - single type - endpoint `/api/contato`
 - `Mensagens de Contato` - collection type - endpoint `/api/mensagens-contatos`
 - `Edicao Galeria` - collection type - endpoint `/api/edicao-galerias`
 
 ### Estrutura da Home
 
-O conteudo `Datas da Home` foi modelado para edicao simples no Strapi:
+O conteudo `Home - Datas` foi modelado para edicao simples no Strapi:
 
 - `tituloSecao`
 - `etapa1Titulo` + `etapa1Data`
@@ -176,3 +176,7 @@ Para orientacao de edicao e operacao do CMS, consulte:
 
 - [Guia de Usabilidade do Strapi](./docs/USABILIDADE-STRAPI.md)
 - [Registro de Testes Operacionais](./docs/OPERACOES-STRAPI.md)
+
+
+
+

@@ -4,7 +4,7 @@
   "info": {
     "singularName": "home-data",
     "pluralName": "home-datas",
-    "displayName": "Datas da Home"
+    "displayName": "Home - Datas"
   },
   "options": {
     "draftAndPublish": true
@@ -34,3 +34,4 @@
     }
   }
 }
+

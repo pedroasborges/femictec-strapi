@@ -4,7 +4,7 @@
   "info": {
     "singularName": "femictec",
     "pluralName": "femictecs",
-    "displayName": "Femictec"
+    "displayName": "Página - FEMICTEC"
   },
   "options": {
     "draftAndPublish": true
@@ -33,3 +33,4 @@
     }
   }
 }
+

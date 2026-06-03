@@ -4,7 +4,7 @@
   "info": {
     "singularName": "dado-institucional",
     "pluralName": "dado-institucionals",
-    "displayName": "DadoInstitucional"
+    "displayName": "Home - Dado Institucional"
   },
   "options": {
     "draftAndPublish": true
@@ -41,3 +41,4 @@
     }
   }
 }
+

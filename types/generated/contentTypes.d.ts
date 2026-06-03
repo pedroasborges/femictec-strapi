@@ -433,7 +433,7 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
 export interface ApiBannerBanner extends Struct.CollectionTypeSchema {
   collectionName: 'banners';
   info: {
-    displayName: 'Banner';
+    displayName: 'Home - Banner';
     pluralName: 'banners';
     singularName: 'banner';
   };
@@ -503,7 +503,7 @@ export interface ApiDadoInstitucionalDadoInstitucional
   extends Struct.SingleTypeSchema {
   collectionName: 'dado_institucionals';
   info: {
-    displayName: 'DadoInstitucional';
+    displayName: 'Home - Dado Institucional';
     pluralName: 'dado-institucionals';
     singularName: 'dado-institucional';
   };
@@ -665,7 +665,7 @@ export interface ApiFeiraFeira extends Struct.SingleTypeSchema {
 export interface ApiFemictecFemictec extends Struct.SingleTypeSchema {
   collectionName: 'femictecs';
   info: {
-    displayName: 'Femictec';
+    displayName: 'P\u00E1gina - FEMICTEC';
     pluralName: 'femictecs';
     singularName: 'femictec';
   };
@@ -696,7 +696,7 @@ export interface ApiFemictecFemictec extends Struct.SingleTypeSchema {
 export interface ApiFooterFooter extends Struct.SingleTypeSchema {
   collectionName: 'footers';
   info: {
-    displayName: 'Footer';
+    displayName: 'Global - Footer';
     pluralName: 'footers';
     singularName: 'footer';
   };
@@ -728,7 +728,7 @@ export interface ApiFooterFooter extends Struct.SingleTypeSchema {
 export interface ApiHomeDataHomeData extends Struct.SingleTypeSchema {
   collectionName: 'home_datas';
   info: {
-    displayName: 'Datas da Home';
+    displayName: 'Home - Datas';
     pluralName: 'home-datas';
     singularName: 'home-data';
   };
@@ -826,7 +826,7 @@ export interface ApiMensagensContatoMensagensContato
 export interface ApiNavbarNavbar extends Struct.SingleTypeSchema {
   collectionName: 'navbars';
   info: {
-    displayName: 'Navbar';
+    displayName: 'Global - Navbar';
     pluralName: 'navbars';
     singularName: 'navbar';
   };
