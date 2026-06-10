@@ -871,6 +871,7 @@ export interface ApiNoticiaNoticia extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     dataHorario: Schema.Attribute.DateTime;
     descricao: Schema.Attribute.String;
+    descricaoImagem: Schema.Attribute.String;
     imagem: Schema.Attribute.Media<
       'images' | 'files' | 'videos' | 'audios',
       true

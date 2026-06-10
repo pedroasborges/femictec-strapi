@@ -32,6 +32,9 @@
     },
     "dataHorario": {
       "type": "datetime"
+    },
+    "descricaoImagem": {
+      "type": "string"
     }
   }
 }
