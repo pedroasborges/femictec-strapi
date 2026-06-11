@@ -16,5 +16,13 @@ export default {
         auth: false,
       },
     },
+    {
+      method: 'GET',
+      path: '/public/femictec/schedule',
+      handler: 'femictec.schedule',
+      config: {
+        auth: false,
+      },
+    },
   ],
 };

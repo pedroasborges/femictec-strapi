@@ -36,6 +36,7 @@ Os testes de integracao existentes no repositorio sao:
 
 - `npm run test:integration:current-event`
 - `npm run test:integration:stats`
+- `npm run test:integration:schedule`
 
 Esses testes validam:
 
@@ -47,10 +48,12 @@ Resultados obtidos na validacao desta base:
 
 - `current-event`: `PASS`
 - `stats`: `PASS`
+- `schedule`: `PASS`
 
 Nota tecnica:
 
 - o endpoint `stats` foi ajustado para retornar totais zerados quando o content type de projetos nao existe nesta base, evitando `500` durante a validacao operacional.
+- o endpoint `schedule` segue o mesmo padrao e retorna `200` com estrutura vazia quando nao ha publicacao.
 
 ## Endpoints verificados
 
@@ -83,6 +86,7 @@ Valida:
 Resultado observado na verificacao manual:
 
 - `current-event`: `200` com `activeEdition` e `dates` nulos na base local sem publicacao;
+- `schedule`: `200` com `programacaoDias` vazio na base local sem publicacao;
 - `stats`: `200` com totais zerados na base local sem conteudo de projetos.
 
 ## Verificacoes manuais adicionais
@@ -110,5 +114,5 @@ Esse comportamento e esperado para `single types` com `draftAndPublish` ativo e 
 Quando o ambiente esta pronto, o esperado e:
 
 - `npm run test:scripts` concluir sem falhas;
-- os dois testes de integracao retornarem `PASS`;
+- os tres testes de integracao retornarem `PASS`;
 - os endpoints publicos responderem com `200` e objeto `data`.

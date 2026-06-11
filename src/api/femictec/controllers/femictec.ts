@@ -77,6 +77,44 @@ const extractSubmissionDeadline = (items: unknown): string | null => {
   return normalizeText(preferred?.data) ?? normalizeText(parsedItems[0].data);
 };
 
+const normalizeActivity = (item: unknown) => {
+  if (!item || typeof item !== 'object') {
+    return {
+      horario: null,
+      titulo: null,
+    };
+  }
+
+  const activity = item as { horario?: unknown; titulo?: unknown };
+
+  return {
+    horario: normalizeText(activity.horario),
+    titulo: normalizeText(activity.titulo),
+  };
+};
+
+const normalizeProgramacaoDia = (item: unknown) => {
+  if (!item || typeof item !== 'object') {
+    return {
+      dia: null,
+      data: null,
+      atividades: [],
+    };
+  }
+
+  const day = item as {
+    dia?: unknown;
+    data?: unknown;
+    atividades?: unknown;
+  };
+
+  return {
+    dia: normalizeText(day.dia),
+    data: normalizeText(day.data),
+    atividades: Array.isArray(day.atividades) ? day.atividades.map(normalizeActivity) : [],
+  };
+};
+
 export default factories.createCoreController('api::femictec.femictec', ({ strapi }) => ({
   async currentEvent(ctx) {
     const feira = await strapi.entityService.findMany('api::feira.feira', {
@@ -170,6 +208,53 @@ export default factories.createCoreController('api::femictec.femictec', ({ strap
         totalSchools: schools.size,
         totalParticipants: participants,
         totalAreas: areas.size,
+      },
+    };
+  },
+
+  async schedule(ctx) {
+    const feira = await strapi.entityService.findMany('api::feira.feira', {
+      populate: {
+        visaoGeral: {
+          fields: ['edicaoTitulo'],
+        },
+        programacao: {
+          fields: ['programacaoTitulo'],
+          populate: {
+            programacaoDias: {
+              fields: ['dia', 'data'],
+              populate: {
+                atividades: {
+                  fields: ['horario', 'titulo'],
+                },
+              },
+            },
+          },
+        },
+      },
+      publicationState: 'live',
+      limit: 1,
+    });
+
+    const feiraData = feira as {
+      visaoGeral?: { edicaoTitulo?: string | null } | null;
+      programacao?: {
+        programacaoTitulo?: string | null;
+        programacaoDias?: unknown;
+      } | null;
+    } | null;
+
+    const activeEdition = feiraData?.visaoGeral?.edicaoTitulo ?? null;
+    const programacaoTitulo = feiraData?.programacao?.programacaoTitulo ?? null;
+    const programacaoDias = Array.isArray(feiraData?.programacao?.programacaoDias)
+      ? feiraData.programacao.programacaoDias.map(normalizeProgramacaoDia)
+      : [];
+
+    ctx.body = {
+      data: {
+        activeEdition,
+        programacaoTitulo,
+        programacaoDias,
       },
     };
   },

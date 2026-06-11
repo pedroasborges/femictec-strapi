@@ -92,6 +92,29 @@ Retorno em `data`:
 - `status`: `active | submission_open | submission_closed`
 - `submissionDeadline`: `string | null`
 
+### Schedule
+
+```http
+GET /api/public/femictec/schedule
+```
+
+Retorno em `data`:
+
+- `activeEdition`: `string | null`
+- `programacaoTitulo`: `string | null`
+- `programacaoDias`: `array`
+
+Cada item de `programacaoDias` contem:
+
+- `dia`: `string | null`
+- `data`: `string | null`
+- `atividades`: `array`
+
+Cada item de `atividades` contem:
+
+- `horario`: `string | null`
+- `titulo`: `string | null`
+
 ### Stats
 
 ```http
@@ -141,6 +164,7 @@ curl "http://127.0.0.1:1337/api/feira"
 curl "http://127.0.0.1:1337/api/footer"
 curl "http://127.0.0.1:1337/api/home-data"
 curl "http://127.0.0.1:1337/api/public/femictec/current-event"
+curl "http://127.0.0.1:1337/api/public/femictec/schedule"
 curl "http://127.0.0.1:1337/api/public/femictec/stats"
 ```
 
@@ -151,6 +175,7 @@ Esperado:
 - `footer`: `200` se o registro estiver publicado.
 - `home-data`: `200` com os campos da home.
 - `current-event`: `200` com o contrato publico esperado.
+- `schedule`: `200` com a programacao publica da edicao atual.
 - `stats`: `200` com os totais agregados.
 
 ## Testes
@@ -160,6 +185,7 @@ Scripts disponiveis:
 - `npm run test:scripts`
 - `npm run test:integration:current-event`
 - `npm run test:integration:stats`
+- `npm run test:integration:schedule`
 - `npm run test:all`
 
 Observacao:

@@ -24,7 +24,13 @@ async function run() {
   const body = await response.json();
 
   assert.ok(body && typeof body === 'object', 'Response body must be an object');
+  assert.deepEqual(Object.keys(body).sort(), ['data'], 'Response must expose only `data`');
   assert.ok(body.data && typeof body.data === 'object', 'Response must contain `data` object');
+  assert.deepEqual(
+    Object.keys(body.data).sort(),
+    ['activeEdition', 'dates', 'status', 'submissionDeadline'],
+    'Unexpected keys in `data`',
+  );
 
   const { activeEdition, dates, status, submissionDeadline } = body.data;
 
