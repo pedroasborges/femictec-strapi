@@ -15,10 +15,11 @@
       "type": "string"
     },
     "descricao": {
-      "type": "string"
+      "type": "text"
     },
     "miniDescricao": {
-      "type": "text"
+      "type": "string",
+      "maxLength": 255
     },
     "imagem": {
       "type": "media",

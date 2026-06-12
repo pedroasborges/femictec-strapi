@@ -870,7 +870,7 @@ export interface ApiNoticiaNoticia extends Struct.CollectionTypeSchema {
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     dataHorario: Schema.Attribute.DateTime;
-    descricao: Schema.Attribute.String;
+    descricao: Schema.Attribute.Text;
     descricaoImagem: Schema.Attribute.String;
     imagem: Schema.Attribute.Media<
       'images' | 'files' | 'videos' | 'audios',
@@ -882,7 +882,10 @@ export interface ApiNoticiaNoticia extends Struct.CollectionTypeSchema {
       'api::noticia.noticia'
     > &
       Schema.Attribute.Private;
-    miniDescricao: Schema.Attribute.Text;
+    miniDescricao: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 255;
+      }>;
     publishedAt: Schema.Attribute.DateTime;
     titulo: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
