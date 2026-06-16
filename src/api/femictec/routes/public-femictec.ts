@@ -18,6 +18,30 @@ export default {
     },
     {
       method: 'GET',
+      path: '/public/femictec/projects',
+      handler: 'femictec.projects',
+      config: {
+        auth: false,
+      },
+    },
+    {
+      method: 'GET',
+      path: '/public/femictec/projects/:id',
+      handler: 'femictec.project',
+      config: {
+        auth: false,
+      },
+    },
+    {
+      method: 'GET',
+      path: '/public/femictec/results',
+      handler: 'femictec.results',
+      config: {
+        auth: false,
+      },
+    },
+    {
+      method: 'GET',
       path: '/public/femictec/schedule',
       handler: 'femictec.schedule',
       config: {

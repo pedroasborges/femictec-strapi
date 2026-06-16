@@ -59,6 +59,8 @@ No desenvolvimento, o projeto usa `sqlite` por padrao. Em producao, o padrao e `
 - `Home - Datas` - single type - endpoint `/api/home-data`
 - `Eventos_Feira` - collection type - endpoint `/api/eventos-feiras`
 - `Noticia` - collection type - endpoint `/api/noticias`
+- `Projeto` - collection type - endpoint `/api/projetos`
+- `Resultado` - collection type - endpoint `/api/resultados`
 - `Termo de Uso` - single type - endpoint `/api/termo-de-uso`
 - `Regulamento` - single type - endpoint `/api/regulamento`
 - `Politica de Privacidade` - single type - endpoint `/api/politica-de-privacidade`
@@ -141,6 +143,57 @@ Regras de agregacao:
 - `totalParticipants`: soma de `participantes`
 - `totalAreas`: quantidade de areas distintas normalizadas em lowercase
 
+### Projects
+
+```http
+GET /api/public/femictec/projects
+GET /api/public/femictec/projects/:id
+```
+
+Regras:
+
+- lista apenas projetos publicados e liberados pela administracao da FEMICTEC;
+- retorna paginação no formato `meta.pagination`;
+- aceita filtros por `q`, `escola`, `area`, `participantesMin`, `participantesMax`;
+- aceita ordenacao via `sort`, com `publishedAt:desc` como padrão;
+- o detalhe retorna somente os campos permitidos para exibicao publica.
+
+Campos publicos de projeto:
+
+- `id`
+- `documentId`
+- `titulo`
+- `descricao`
+- `escola`
+- `area`
+- `participantes`
+- `imagem`
+
+### Results
+
+```http
+GET /api/public/femictec/results
+```
+
+Regras:
+
+- lista apenas resultados apos publicacao administrativa explicita;
+- retorna paginação no formato `meta.pagination`;
+- aceita filtros por `q`, `edicao`, `categoria`;
+- aceita ordenacao via `sort`, com `publishedAt:desc` como padrão;
+- nao expõe conteudo fora do contrato publico.
+
+Campos publicos de resultado:
+
+- `id`
+- `documentId`
+- `titulo`
+- `descricao`
+- `edicao`
+- `categoria`
+- `imagem`
+- `arquivo`
+
 ## Permissoes necessarias no Public
 
 No Strapi Admin:
@@ -154,7 +207,7 @@ Habilitar no minimo:
 - `api::footer.footer.find`
 - `api::footer.footer.findOne`
 
-Se o frontend consumir outros conteudos publicos, libere tambem as permissoes correspondentes.
+Os endpoints customizados `public/femictec/*` usam `auth: false` e nao dependem da permissao padrão do plugin para serem consumidos.
 
 ## Validacao rapida
 
@@ -166,6 +219,9 @@ curl "http://127.0.0.1:1337/api/home-data"
 curl "http://127.0.0.1:1337/api/public/femictec/current-event"
 curl "http://127.0.0.1:1337/api/public/femictec/schedule"
 curl "http://127.0.0.1:1337/api/public/femictec/stats"
+curl "http://127.0.0.1:1337/api/public/femictec/projects?page=1&pageSize=5"
+curl "http://127.0.0.1:1337/api/public/femictec/projects/1"
+curl "http://127.0.0.1:1337/api/public/femictec/results?page=1&pageSize=5"
 ```
 
 Esperado:
@@ -177,6 +233,9 @@ Esperado:
 - `current-event`: `200` com o contrato publico esperado.
 - `schedule`: `200` com a programacao publica da edicao atual.
 - `stats`: `200` com os totais agregados.
+- `projects`: `200` com paginação e lista vazia ou itens publicados.
+- `projects/:id`: `200` para um registro publicado ou `404` para id inexistente.
+- `results`: `200` com paginação e lista vazia ou itens publicados.
 
 ## Testes
 
@@ -185,6 +244,9 @@ Scripts disponiveis:
 - `npm run test:scripts`
 - `npm run test:integration:current-event`
 - `npm run test:integration:stats`
+- `npm run test:integration:projects`
+- `npm run test:integration:project-detail`
+- `npm run test:integration:results`
 - `npm run test:integration:schedule`
 - `npm run test:all`
 

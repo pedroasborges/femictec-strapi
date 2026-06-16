@@ -18,8 +18,11 @@
     "test:scripts": "node scripts/tests/run-tests.mjs",
     "test:integration:current-event": "node scripts/tests/current-event.integration.mjs",
     "test:integration:stats": "node scripts/tests/stats.integration.mjs",
+    "test:integration:projects": "node scripts/tests/projects.integration.mjs",
+    "test:integration:project-detail": "node scripts/tests/project-detail.integration.mjs",
+    "test:integration:results": "node scripts/tests/results.integration.mjs",
     "test:integration:schedule": "node scripts/tests/schedule.integration.mjs",
-    "test:all": "npm run test:scripts && npm run test:integration:current-event && npm run test:integration:stats && npm run test:integration:schedule",
+    "test:all": "npm run test:scripts && npm run test:integration:current-event && npm run test:integration:stats && npm run test:integration:projects && npm run test:integration:project-detail && npm run test:integration:results && npm run test:integration:schedule",
     "upgrade": "npx @strapi/upgrade latest",
     "upgrade:dry": "npx @strapi/upgrade latest --dry"
   },
