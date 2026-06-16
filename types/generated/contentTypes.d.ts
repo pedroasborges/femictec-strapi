@@ -869,7 +869,8 @@ export interface ApiNoticiaNoticia extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    dataHorario: Schema.Attribute.DateTime;
+    dataPublicacao: Schema.Attribute.DateTime;
+    dataUltimaEdicao: Schema.Attribute.DateTime;
     descricao: Schema.Attribute.Text;
     descricaoImagem: Schema.Attribute.String;
     imagem: Schema.Attribute.Media<

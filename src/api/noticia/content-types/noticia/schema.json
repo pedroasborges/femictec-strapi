@@ -31,8 +31,13 @@
         "audios"
       ]
     },
-    "dataHorario": {
-      "type": "datetime"
+    "dataPublicacao": {
+      "type": "datetime",
+      "description": "Data inicial da noticia. E definida no primeiro salvamento e nao deve ser alterada depois."
+    },
+    "dataUltimaEdicao": {
+      "type": "datetime",
+      "description": "Atualizada automaticamente em cada edicao da noticia."
     },
     "descricaoImagem": {
       "type": "string"

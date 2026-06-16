@@ -70,6 +70,20 @@ No desenvolvimento, o projeto usa `sqlite` por padrao. Em producao, o padrao e `
 - `Mensagens de Contato` - collection type - endpoint `/api/mensagens-contatos`
 - `Edicao Galeria` - collection type - endpoint `/api/edicao-galerias`
 
+### Noticia
+
+Campos de data preparados no Strapi:
+
+- `dataPublicacao`: recebe a data de criacao da noticia e fica imutavel;
+- `dataUltimaEdicao`: recebe a data da ultima edicao;
+
+Observacao:
+
+- o editor pode definir `dataPublicacao` apenas no primeiro salvamento;
+- depois disso, a data fica fixa e nao sofre nova alteracao manual;
+- se a noticia nunca for editada depois da criacao, `dataUltimaEdicao` fica igual a `dataPublicacao`;
+- nao existe mais agendamento por campo proprio nesta noticia.
+
 ### Estrutura da Home
 
 O conteudo `Home - Datas` foi modelado para edicao simples no Strapi:

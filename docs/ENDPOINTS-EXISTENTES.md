@@ -136,3 +136,17 @@ Gerados automaticamente por `createCoreRouter(...)`.
 - Os resultados so sao exibidos publicamente apos publicacao administrativa explicita.
 - As rotas publicas customizadas usam `auth: false`.
 - O frontend deve consumir `/api/public/femictec/*` quando precisar do contrato enxuto e controlado.
+
+## 4. Noticia: datas editoriais
+
+Campos preparados no content type `noticia`:
+
+- `dataPublicacao`: recebe a data de criacao da noticia e fica imutavel;
+- `dataUltimaEdicao`: recebe a data da ultima edicao;
+
+Observacao:
+
+- o editor pode definir `dataPublicacao` apenas no primeiro salvamento;
+- depois disso, a data fica fixa e nao sofre nova alteracao manual;
+- se a noticia nunca for editada depois da criacao, `dataUltimaEdicao` fica igual a `dataPublicacao`;
+- nao existe mais agendamento por campo proprio nesta noticia.
