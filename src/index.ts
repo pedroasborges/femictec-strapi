@@ -1,4 +1,4 @@
-import { backfillNoticeDates } from './api/noticia/utils/publication';
+import { backfillNoticeDates, backfillNoticeSlugs } from './api/noticia/utils/publication';
 
 export default {
   /**
@@ -18,5 +18,6 @@ export default {
    */
   async bootstrap({ strapi }) {
     await backfillNoticeDates(strapi);
+    await backfillNoticeSlugs(strapi);
   },
 };

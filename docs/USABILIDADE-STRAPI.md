@@ -9,7 +9,8 @@ O Strapi neste projeto serve como painel de administracao para:
 - paginas institucionais;
 - blocos de conteudo reutilizaveis;
 - listas de itens publicados;
-- rotas publicas consumidas pelo frontend.
+- rotas publicas consumidas pelo frontend;
+- conteudos importados da plataforma externa.
 
 O modelo foi desenhado para dividir o conteudo em partes pequenas e previsiveis, facilitando a edicao por quem nao mexe no codigo.
 
@@ -18,7 +19,7 @@ O modelo foi desenhado para dividir o conteudo em partes pequenas e previsiveis,
 Na pratica, a plataforma e organizada em quatro padroes:
 
 - `single types`: paginas unicas, como `Feira`, `Home` e `Contato`, e blocos globais como `Navbar` e `Footer`;
-- `collection types`: listas, como noticias, eventos e galerias;
+- `collection types`: listas, como noticias, eventos, galerias e projetos;
 - `components`: blocos de formulario agrupados por tema;
 - `public APIs`: rotas de leitura que o frontend consome diretamente.
 
@@ -32,7 +33,8 @@ Antes de editar, confirme se o conteudo esta em:
 
 - uma pagina unica;
 - uma lista de itens;
-- um componente dentro de outra pagina.
+- um componente dentro de outra pagina;
+- um item importado da plataforma externa.
 
 Isso evita editar o lugar errado e publicar um conteudo incompleto.
 
@@ -43,7 +45,7 @@ Sempre que houver componentes repetiveis, preencha um bloco por vez.
 Exemplos:
 
 - `Feira` tem `visaoGeral`, `cronograma` e `programacao`;
-- `Página - FEMICTEC` tem `menuInterno`, `apresentacao`, `quemRealiza` e `historico`;
+- `Pagina - FEMICTEC` tem `menuInterno`, `apresentacao`, `quemRealiza` e `historico`;
 - `FAQ` tem uma lista de `perguntas`;
 - `Contato` tem varios `destinatariosEvento`.
 
@@ -108,7 +110,7 @@ Boa pratica:
 
 Conteudo principal:
 
-- Página - FEMICTEC
+- `Pagina - FEMICTEC`
 
 Componentes:
 
@@ -119,7 +121,7 @@ Componentes:
 
 Como editar:
 
-- `menuInterno` define navegação interna da pagina;
+- `menuInterno` define navegacao interna da pagina;
 - `apresentacao` concentra a introducao e os blocos de destaque;
 - `quemRealiza` agrega organizacao e parceiros;
 - `historico` guarda a memoria institucional, edicoes e tabela de referencias.
@@ -171,6 +173,36 @@ Boa pratica:
 - se os templates forem usados pelo frontend, mantenha placeholders consistentes;
 - qualquer mudanca no e-mail de destino precisa ser validada com atencao.
 
+### Mensagens de Contato
+
+Conteudo principal:
+
+- `Mensagens Contato`
+
+Como funciona:
+
+- o formulario publico do site cria um registro nesta collection;
+- o Strapi envia um e-mail para a equipe configurada no `Contato`;
+- o Strapi envia uma confirmacao para o e-mail informado pelo usuario;
+- o reply-to do e-mail da equipe aponta para o e-mail do usuario, facilitando a resposta.
+
+Endpoint publico usado pelo site:
+
+- `POST /api/mensagens-contatos/submit`
+
+Campos esperados:
+
+- `nome`
+- `email`
+- `assunto`
+- `mensagem`
+
+Boa pratica:
+
+- confira o e-mail principal do `Contato` antes de publicar;
+- mantenha os templates de confirmacao e notificacao consistentes;
+- se o envio de e-mail falhar, valide primeiro a configuracao do provider no `config/plugins.ts` e as variaveis `EMAIL_*`.
+
 ### Conteudos institucionais
 
 Conteudos comuns:
@@ -189,6 +221,26 @@ Boa pratica:
 - mantenha o tom institucional uniforme;
 - evite duplicar informacoes entre paginas;
 - imagens de marca devem ter nomes e `alt` consistentes.
+
+### Integracao externa
+
+Conteudos importados da Plataforma Conecta:
+
+- `Projeto`
+- `Resultado`
+
+Como funciona:
+
+- os registros entram por sincronizacao manual;
+- a importacao nao publica automaticamente;
+- a liberacao final continua sendo editorial no Strapi.
+
+Campos editoriais locais:
+
+- `descricao`
+- `imagem`
+- `arquivo` no `Resultado`
+- `categoria` no `Resultado`
 
 ## Regras de preenchimento
 
@@ -237,6 +289,3 @@ Boa pratica:
 ## Testes operacionais desta analise
 
 Veja o registro executado em [docs/OPERACOES-STRAPI.md](./OPERACOES-STRAPI.md).
-
-
-

@@ -10,7 +10,7 @@ async function run() {
   } catch (error) {
     console.error(`FAIL request ${endpoint}`);
     console.error(
-      'Could not connect to API. Start Strapi first (ex: `npm run develop`) or set `API_BASE_URL`.',
+      'Não foi possível conectar à API. Inicie o Strapi primeiro (ex: `npm run develop`) ou defina `API_BASE_URL`.',
     );
     throw error;
   }

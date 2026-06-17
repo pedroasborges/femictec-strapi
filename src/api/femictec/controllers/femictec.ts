@@ -3,6 +3,10 @@
  */
 
 import { factories } from '@strapi/strapi';
+import {
+  syncExternalProjects,
+  type ExternalProjectsIntegrationFilters,
+} from '../utils/external-sync';
 
 const DATE_PATTERN = /(\d{1,2})[\/.-](\d{1,2})[\/.-](\d{4})/;
 const PROJECT_UID = 'api::projeto.projeto';
@@ -67,6 +71,19 @@ const normalizeInteger = (value: unknown): number | null => {
   return Number.isInteger(normalized) && Number.isFinite(normalized) ? normalized : null;
 };
 
+const normalizeDecimal = (value: unknown): number | null => {
+  if (typeof value === 'number' && Number.isFinite(value)) {
+    return value;
+  }
+
+  if (typeof value !== 'string') {
+    return null;
+  }
+
+  const normalized = Number.parseFloat(value);
+  return Number.isFinite(normalized) ? normalized : null;
+};
+
 const escapeSearch = (value: string) => value.trim();
 
 const sanitizeMedia = (value: unknown) => {
@@ -95,6 +112,18 @@ const sanitizeMedia = (value: unknown) => {
     height: typeof media.height === 'number' ? media.height : null,
     size: typeof media.size === 'number' ? media.size : null,
   };
+};
+
+const normalizeJson = (value: unknown) => {
+  if (Array.isArray(value)) {
+    return value;
+  }
+
+  if (value && typeof value === 'object') {
+    return value;
+  }
+
+  return null;
 };
 
 const buildPagination = (query: Record<string, unknown>) => {
@@ -134,7 +163,12 @@ const buildProjectsFilters = (query: Record<string, unknown>) => {
   const participantesMax = normalizeInteger(query.participantesMax);
 
   if (search) {
-    clauses.push(buildTextSearchFilter(['titulo', 'escola', 'area'], escapeSearch(search)));
+    clauses.push(
+      buildTextSearchFilter(
+        ['titulo', 'resumo', 'escola', 'area', 'orientador', 'eventoNome', 'edicaoNome'],
+        escapeSearch(search)
+      )
+    );
   }
 
   if (escola) {
@@ -182,7 +216,12 @@ const buildResultsFilters = (query: Record<string, unknown>) => {
   const categoria = normalizeText(query.categoria);
 
   if (search) {
-    clauses.push(buildTextSearchFilter(['titulo', 'edicao', 'categoria'], escapeSearch(search)));
+    clauses.push(
+      buildTextSearchFilter(
+        ['titulo', 'resumo', 'edicao', 'categoria', 'escola', 'area', 'orientador', 'conceitoFinal'],
+        escapeSearch(search)
+      )
+    );
   }
 
   if (edicao) {
@@ -216,22 +255,48 @@ const normalizeProject = (item: unknown) => {
   const project = item as {
     id?: unknown;
     documentId?: unknown;
+    origemId?: unknown;
     titulo?: unknown;
+    resumo?: unknown;
     descricao?: unknown;
     escola?: unknown;
     area?: unknown;
+    orientador?: unknown;
     participantes?: unknown;
+    participantesNomes?: unknown;
+    eventoNome?: unknown;
+    eventoSlug?: unknown;
+    edicaoNome?: unknown;
+    edicaoSlug?: unknown;
+    statusExterno?: unknown;
+    notaFinal?: unknown;
+    conceitoFinal?: unknown;
+    dataSubmissao?: unknown;
+    fontePayload?: unknown;
     imagem?: unknown;
   };
 
   return {
     id: normalizeInteger(project.id),
     documentId: normalizeText(project.documentId),
+    origemId: normalizeInteger(project.origemId),
     titulo: normalizeText(project.titulo),
+    resumo: normalizeText(project.resumo),
     descricao: Array.isArray(project.descricao) ? project.descricao : [],
     escola: normalizeText(project.escola),
     area: normalizeText(project.area),
+    orientador: normalizeText(project.orientador),
     participantes: normalizeInteger(project.participantes),
+    participantesNomes: normalizeJson(project.participantesNomes),
+    eventoNome: normalizeText(project.eventoNome),
+    eventoSlug: normalizeText(project.eventoSlug),
+    edicaoNome: normalizeText(project.edicaoNome),
+    edicaoSlug: normalizeText(project.edicaoSlug),
+    statusExterno: normalizeText(project.statusExterno),
+    notaFinal: normalizeDecimal(project.notaFinal),
+    conceitoFinal: normalizeText(project.conceitoFinal),
+    dataSubmissao: normalizeText(project.dataSubmissao),
+    fontePayload: normalizeJson(project.fontePayload),
     imagem: sanitizeMedia(project.imagem),
   };
 };
@@ -244,10 +309,25 @@ const normalizeResult = (item: unknown) => {
   const result = item as {
     id?: unknown;
     documentId?: unknown;
+    origemId?: unknown;
     titulo?: unknown;
+    resumo?: unknown;
     descricao?: unknown;
+    escola?: unknown;
+    area?: unknown;
+    orientador?: unknown;
+    participantes?: unknown;
+    participantesNomes?: unknown;
     edicao?: unknown;
+    edicaoNome?: unknown;
+    edicaoSlug?: unknown;
     categoria?: unknown;
+    statusExterno?: unknown;
+    avaliadoresNomes?: unknown;
+    notaFinal?: unknown;
+    conceitoFinal?: unknown;
+    dataSubmissao?: unknown;
+    fontePayload?: unknown;
     imagem?: unknown;
     arquivo?: unknown;
   };
@@ -255,10 +335,25 @@ const normalizeResult = (item: unknown) => {
   return {
     id: normalizeInteger(result.id),
     documentId: normalizeText(result.documentId),
+    origemId: normalizeInteger(result.origemId),
     titulo: normalizeText(result.titulo),
+    resumo: normalizeText(result.resumo),
     descricao: Array.isArray(result.descricao) ? result.descricao : [],
+    escola: normalizeText(result.escola),
+    area: normalizeText(result.area),
+    orientador: normalizeText(result.orientador),
+    participantes: normalizeInteger(result.participantes),
+    participantesNomes: normalizeJson(result.participantesNomes),
     edicao: normalizeText(result.edicao),
+    edicaoNome: normalizeText(result.edicaoNome),
+    edicaoSlug: normalizeText(result.edicaoSlug),
     categoria: normalizeText(result.categoria),
+    statusExterno: normalizeText(result.statusExterno),
+    avaliadoresNomes: normalizeJson(result.avaliadoresNomes),
+    notaFinal: normalizeDecimal(result.notaFinal),
+    conceitoFinal: normalizeText(result.conceitoFinal),
+    dataSubmissao: normalizeText(result.dataSubmissao),
+    fontePayload: normalizeJson(result.fontePayload),
     imagem: sanitizeMedia(result.imagem),
     arquivo: sanitizeMedia(result.arquivo),
   };
@@ -273,9 +368,12 @@ const normalizeSort = (value: unknown, fallback: string) => {
   const allowedFields = new Set([
     'publishedAt',
     'titulo',
+    'origemId',
     'escola',
     'area',
     'participantes',
+    'notaFinal',
+    'dataSubmissao',
     'edicao',
     'categoria',
   ]);
@@ -352,6 +450,84 @@ const normalizeProgramacaoDia = (item: unknown) => {
     data: normalizeText(day.data),
     atividades: Array.isArray(day.atividades) ? day.atividades.map(normalizeActivity) : [],
   };
+};
+
+const normalizeBoolean = (value: unknown) => {
+  if (typeof value === 'boolean') {
+    return value;
+  }
+
+  if (typeof value === 'string') {
+    const normalized = value.trim().toLowerCase();
+    if (['true', '1', 'yes', 'y'].includes(normalized)) {
+      return true;
+    }
+    if (['false', '0', 'no', 'n'].includes(normalized)) {
+      return false;
+    }
+  }
+
+  return null;
+};
+
+const normalizeSyncFilters = (body: Record<string, unknown>) => {
+  const explicitFilters = body.filters;
+  const source =
+    explicitFilters && typeof explicitFilters === 'object' && !Array.isArray(explicitFilters)
+      ? (explicitFilters as Record<string, unknown>)
+      : body;
+
+  const filters: ExternalProjectsIntegrationFilters = {};
+
+  if (typeof source.project_name === 'string' && source.project_name.trim()) {
+    filters.project_name = source.project_name.trim();
+  }
+
+  if (typeof source.event_id === 'number' && Number.isInteger(source.event_id)) {
+    filters.event_id = source.event_id;
+  }
+
+  if (typeof source.event_name === 'string' && source.event_name.trim()) {
+    filters.event_name = source.event_name.trim();
+  }
+
+  if (typeof source.edition_id === 'number' && Number.isInteger(source.edition_id)) {
+    filters.edition_id = source.edition_id;
+  }
+
+  if (typeof source.edition_name === 'string' && source.edition_name.trim()) {
+    filters.edition_name = source.edition_name.trim();
+  }
+
+  if (typeof source.advisor_name === 'string' && source.advisor_name.trim()) {
+    filters.advisor_name = source.advisor_name.trim();
+  }
+
+  if (typeof source.participant_name === 'string' && source.participant_name.trim()) {
+    filters.participant_name = source.participant_name.trim();
+  }
+
+  if (typeof source.research_area === 'string' && source.research_area.trim()) {
+    filters.research_area = source.research_area.trim();
+  }
+
+  if (typeof source.result_score_min === 'number' && Number.isFinite(source.result_score_min)) {
+    filters.result_score_min = source.result_score_min;
+  }
+
+  if (typeof source.result_score_max === 'number' && Number.isFinite(source.result_score_max)) {
+    filters.result_score_max = source.result_score_max;
+  }
+
+  if (typeof source.result_concept === 'string' && source.result_concept.trim()) {
+    filters.result_concept = source.result_concept.trim();
+  }
+
+  if (typeof source.evaluator_name === 'string' && source.evaluator_name.trim()) {
+    filters.evaluator_name = source.evaluator_name.trim();
+  }
+
+  return filters;
 };
 
 export default factories.createCoreController('api::femictec.femictec', ({ strapi }) => ({
@@ -618,5 +794,70 @@ export default factories.createCoreController('api::femictec.femictec', ({ strap
         programacaoDias,
       },
     };
+  },
+
+  async syncExternalProjects(ctx) {
+    const expectedSecret = normalizeText(process.env.FEMICTEC_SYNC_SECRET);
+    const providedSecret = normalizeText(
+      (ctx.request.headers['x-femictec-sync-secret'] as string | undefined) ??
+        (ctx.request.headers['x-sync-secret'] as string | undefined)
+    );
+
+    if (!expectedSecret) {
+      ctx.status = 500;
+      ctx.body = {
+        error: {
+          status: 500,
+          name: 'ConfigurationError',
+          message: 'FEMICTEC_SYNC_SECRET nao configurado.',
+        },
+      };
+      return;
+    }
+
+    if (!providedSecret || providedSecret !== expectedSecret) {
+      ctx.status = 401;
+      ctx.body = {
+        error: {
+          status: 401,
+          name: 'UnauthorizedError',
+          message: 'Segredo invalido para sincronizacao.',
+        },
+      };
+      return;
+    }
+
+    const requestBody = (ctx.request.body ?? {}) as Record<string, unknown>;
+    const filters = normalizeSyncFilters(requestBody);
+    const pageSize = normalizeInteger(requestBody.pageSize ?? requestBody.page_size) ?? undefined;
+    const maxPages = normalizeInteger(requestBody.maxPages ?? requestBody.max_pages) ?? undefined;
+    const syncResultsValue = normalizeBoolean(requestBody.syncResults ?? requestBody.sync_results);
+    const syncResults = syncResultsValue !== null ? syncResultsValue : true;
+
+    try {
+      const summary = await syncExternalProjects(strapi, {
+        filters,
+        pageSize,
+        maxPages,
+        syncResults,
+      });
+
+      ctx.body = {
+        data: {
+          ...summary,
+          syncResults,
+        },
+      };
+    } catch (error) {
+      const message = error instanceof Error ? error.message : 'Falha ao sincronizar dados externos.';
+      ctx.status = 502;
+      ctx.body = {
+        error: {
+          status: 502,
+          name: 'BadGatewayError',
+          message,
+        },
+      };
+    }
   },
 }));

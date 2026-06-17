@@ -11,21 +11,77 @@
   },
   "pluginOptions": {},
   "attributes": {
+    "origemId": {
+      "type": "integer",
+      "required": true,
+      "unique": true
+    },
     "titulo": {
       "type": "string",
       "required": true,
       "maxLength": 180
     },
+    "resumo": {
+      "type": "text"
+    },
     "descricao": {
       "type": "blocks"
+    },
+    "escola": {
+      "type": "string",
+      "maxLength": 255
+    },
+    "area": {
+      "type": "string",
+      "maxLength": 255
+    },
+    "orientador": {
+      "type": "string",
+      "maxLength": 255
+    },
+    "participantes": {
+      "type": "integer",
+      "min": 0,
+      "default": 0
+    },
+    "participantesNomes": {
+      "type": "json"
     },
     "edicao": {
       "type": "string",
       "maxLength": 120
     },
+    "edicaoNome": {
+      "type": "string",
+      "maxLength": 255
+    },
+    "edicaoSlug": {
+      "type": "string",
+      "maxLength": 255
+    },
     "categoria": {
       "type": "string",
       "maxLength": 120
+    },
+    "statusExterno": {
+      "type": "string",
+      "maxLength": 120
+    },
+    "avaliadoresNomes": {
+      "type": "json"
+    },
+    "notaFinal": {
+      "type": "decimal"
+    },
+    "conceitoFinal": {
+      "type": "string",
+      "maxLength": 120
+    },
+    "dataSubmissao": {
+      "type": "datetime"
+    },
+    "fontePayload": {
+      "type": "json"
     },
     "imagem": {
       "type": "media",

@@ -2,7 +2,7 @@
 
 Documento de referencia dos endpoints expostos pelo backend e do contrato publico usado pelo frontend.
 
-## 1. Endpoints Publicos Customizados
+## 1. Endpoints publicos customizados
 
 Definidos manualmente na rota `public-femictec` e implementados no controller `femictec`.
 
@@ -104,7 +104,7 @@ Definidos manualmente na rota `public-femictec` e implementados no controller `f
 }
 ```
 
-## 2. Endpoints Padrão do Strapi
+## 2. Endpoints padrao do Strapi
 
 Gerados automaticamente por `createCoreRouter(...)`.
 
@@ -130,19 +130,172 @@ Gerados automaticamente por `createCoreRouter(...)`.
 | regulamento | Single | `/api/regulamento` | `src/api/regulamento/routes/regulamento.ts`, `src/api/regulamento/content-types/regulamento/schema.json` |
 | termo-de-uso | Single | `/api/termo-de-uso` | `src/api/termo-de-uso/routes/termo-de-uso.ts`, `src/api/termo-de-uso/content-types/termo-de-uso/schema.json` |
 
-## 3. Regras Publicas Importantes
+## 3. Regras publicas importantes
 
 - Os projetos so sao exibidos publicamente quando estiverem publicados e liberados pela administracao da FEMICTEC.
 - Os resultados so sao exibidos publicamente apos publicacao administrativa explicita.
 - As rotas publicas customizadas usam `auth: false`.
 - O frontend deve consumir `/api/public/femictec/*` quando precisar do contrato enxuto e controlado.
 
-## 4. Noticia: datas editoriais
+## 4. Projeto e Resultado: origem externa
+
+Os conteudos de `Projeto` e `Resultado` sao alimentados a partir da plataforma externa informada nesta conversa.
+`Resultado` pode ser formado a partir do mesmo payload de `Projeto`, priorizando apenas os itens que tragam `final_result_score` ou `final_result_concept`.
+
+O passo a passo completo da construcao e configuracao da integracao esta em:
+
+- [docs/INTEGRACAO-EXTERNA-PLATAFORMA-CONNECTA.md](./INTEGRACAO-EXTERNA-PLATAFORMA-CONNECTA.md)
+
+### Fonte externa
+
+- URL canonica: `POST /integrations/projects`
+- URL legada: `GET /integrations/projects`
+- autenticacao: `Authorization: Bearer <EXTERNAL_PROJECTS_API_TOKEN>`
+- em desenvolvimento local, a API externa fica disponivel em `http://localhost:8000/integrations/projects`
+
+### Filtros aceitos
+
+- `page`
+- `page_size`
+- `project_name`
+- `event_id`
+- `event_name`
+- `edition_id`
+- `edition_name`
+- `advisor_name`
+- `participant_name`
+- `research_area`
+- `result_score_min`
+- `result_score_max`
+- `result_concept`
+- `evaluator_name`
+
+### Mapeamento para `Projeto`
+
+| Campo Strapi | Origem externa | Observacao |
+| --- | --- | --- |
+| `origemId` | `project_id` | Identificador unico da origem |
+| `titulo` | `title` | Titulo publico do projeto |
+| `resumo` | `summary` | Resumo padrao importado da plataforma |
+| `escola` | `school_name` | Nome da escola |
+| `area` | `research_area` | Area de pesquisa |
+| `orientador` | `advisor_name` | Nome do orientador |
+| `participantesNomes` | `participant_names` | Lista de participantes |
+| `participantes` | derivado de `participant_names` | Quantidade total de participantes |
+| `eventoNome` | `event.name` | Nome do evento |
+| `eventoSlug` | `event.slug` | Slug do evento |
+| `edicaoNome` | `edition.name` | Nome da edicao |
+| `edicaoSlug` | `edition.slug` | Slug da edicao |
+| `statusExterno` | `status` | Status informado pela plataforma |
+| `notaFinal` | `final_result_score` | Nota final consolidada |
+| `conceitoFinal` | `final_result_concept` | Conceito final consolidado |
+| `dataSubmissao` | `submitted_at` | Data/hora da submissao |
+| `fontePayload` | payload bruto | Guarda a resposta original para auditoria e reimportacao |
+
+### Mapeamento para `Resultado`
+
+| Campo Strapi | Origem externa | Observacao |
+| --- | --- | --- |
+| `origemId` | `project_id` | Identificador unico da origem |
+| `titulo` | `title` | Titulo publico do resultado |
+| `resumo` | `summary` | Resumo importado da plataforma |
+| `escola` | `school_name` | Nome da escola |
+| `area` | `research_area` | Area de pesquisa |
+| `orientador` | `advisor_name` | Nome do orientador |
+| `participantesNomes` | `participant_names` | Lista de participantes |
+| `participantes` | derivado de `participant_names` | Quantidade total de participantes |
+| `edicaoNome` | `edition.name` | Nome da edicao |
+| `edicaoSlug` | `edition.slug` | Slug da edicao |
+| `statusExterno` | `status` | Status informado pela plataforma |
+| `avaliadoresNomes` | `evaluator_names` | Lista de avaliadores |
+| `notaFinal` | `final_result_score` | Nota final consolidada |
+| `conceitoFinal` | `final_result_concept` | Conceito final consolidado |
+| `dataSubmissao` | `submitted_at` | Data/hora da submissao |
+| `fontePayload` | payload bruto | Guarda a resposta original para auditoria e reimportacao |
+
+### Campos editoriais locais
+
+Os campos abaixo continuam sob responsabilidade do time editorial do Strapi e nao dependem da API externa:
+
+- `descricao`
+- `imagem`
+- `arquivo` no `Resultado`
+- `categoria` no `Resultado`, se quiser classificacao editorial adicional
+
+### Regra de publicacao
+
+- o conteudo entra no Strapi como rascunho ou item controlado internamente;
+- somente registros com `publishedAt` preenchido devem aparecer nas rotas publicas;
+- a publicacao no site nao depende apenas do status externo, e sim da liberacao administrativa no Strapi.
+
+### Sincronizacao manual interna
+
+```http
+POST /api/femictec/external-projects/sync
+```
+
+Headers obrigatorios:
+
+- `x-femictec-sync-secret: <FEMICTEC_SYNC_SECRET>`
+
+Corpo opcional:
+
+```json
+{
+  "pageSize": 50,
+  "maxPages": 1000,
+  "syncResults": true,
+  "project_name": "robotica",
+  "event_name": "femictec",
+  "edition_name": "2026"
+}
+```
+
+Observacoes:
+
+- os filtros do corpo sao repassados para a plataforma externa;
+- quando `syncResults` estiver `true`, o Strapi tambem tenta sincronizar os registros de `Resultado` que ja tenham nota ou conceito final;
+- o endpoint nao publica automaticamente os registros, apenas atualiza os dados internos;
+- o conector suporta `POST` e `GET` na API externa, com `AUTO` como comportamento padrao;
+- `descricao`, `imagem`, `arquivo` e outros campos editoriais continuam sob controle humano.
+
+## 5. Contato e envio de mensagem
+
+O formulario publico do site deve enviar mensagens para:
+
+```http
+POST /api/mensagens-contatos/submit
+```
+
+Esse endpoint:
+
+- grava o registro em `Mensagens de Contato`;
+- envia um e-mail para o e-mail principal do `Contato` e para os destinatarios extras configurados em `destinatariosEvento`;
+- envia uma confirmacao para o e-mail informado pelo usuario;
+- usa `replyTo` com o e-mail do usuario, para facilitar a resposta direta pela equipe.
+
+Campos aceitos:
+
+- `nome`
+- `email`
+- `assunto`
+- `mensagem`
+
+Configuracao de e-mail:
+
+- `EMAIL_PROVIDER`
+- `EMAIL_DEFAULT_FROM`
+- `EMAIL_DEFAULT_REPLY_TO`
+- o e-mail principal do `Contato`
+
+## 6. Noticia: datas editoriais
 
 Campos preparados no content type `noticia`:
 
+- `slug`: identificador publico usado no link da noticia;
 - `dataPublicacao`: recebe a data de criacao da noticia e fica imutavel;
 - `dataUltimaEdicao`: recebe a data da ultima edicao;
+- `imagem`: e retornada populada por padrao nos endpoints `find` e `findOne`.
 
 Observacao:
 

@@ -7,7 +7,8 @@ Registro objetivo dos testes executados para validar o projeto depois da analise
 Objetivo:
 
 - validar os scripts de automacao do repositorio;
-- validar o contrato dos endpoints publicos do Femictec;
+- validar o contrato dos endpoints publicos da FEMICTEC;
+- validar a integracao externa da Plataforma Conecta;
 - documentar o que foi verificado de forma operacional.
 
 ## Testes de scripts
@@ -40,6 +41,7 @@ Os testes de integracao existentes no repositorio sao:
 - `npm run test:integration:project-detail`
 - `npm run test:integration:results`
 - `npm run test:integration:schedule`
+- `npm run test:integration:external-projects`
 
 Esses testes validam:
 
@@ -58,9 +60,11 @@ Resultados obtidos na validacao desta base:
 
 Nota tecnica:
 
-- o endpoint `stats` foi ajustado para retornar totais zerados quando o content type de projetos nao existe nesta base, evitando `500` durante a validacao operacional.
-- `projects` e `results` retornam apenas conteudo publicado, com paginação e campos publicos limitados.
-- o endpoint `schedule` segue o mesmo padrao e retorna `200` com estrutura vazia quando nao ha publicacao.
+- o endpoint `stats` foi ajustado para retornar totais zerados quando o content type de projetos nao existe nesta base, evitando `500` durante a validacao operacional;
+- `projects` e `results` retornam apenas conteudo publicado, com paginacao e campos publicos limitados;
+- o endpoint `schedule` segue o mesmo padrao e retorna `200` com estrutura vazia quando nao ha publicacao;
+- o teste `external-projects` exige acesso de rede, `EXTERNAL_PROJECTS_API_URL` e `EXTERNAL_PROJECTS_API_TOKEN`.
+- o novo endpoint `POST /api/mensagens-contatos/submit` depende do provider de e-mail configurado para enviar notificacoes e confirmacoes.
 
 ## Endpoints verificados
 
@@ -111,6 +115,33 @@ Valida:
 - `results`: listagem publica paginada;
 - ambos respeitam a regra de exibicao apenas apos liberacao/publicacao administrativa.
 
+### Integracao externa
+
+```bash
+npm run test:integration:external-projects
+```
+
+Valida:
+
+- autenticao por bearer token;
+- contrato da resposta da Plataforma Conecta;
+- chaves permitidas em `items`;
+- estrutura de `event` e `edition`;
+- uso do endpoint `POST /integrations/projects`.
+
+### Formulario de contato
+
+```http
+POST /api/mensagens-contatos/submit
+```
+
+Valida:
+
+- criacao de mensagem no Strapi;
+- envio para os destinatarios cadastrados no `Contato`;
+- envio de confirmacao para o usuario;
+- `replyTo` configurado com o e-mail do usuario.
+
 ## Verificacoes manuais adicionais
 
 Na instancia local de desenvolvimento, os endpoints abaixo foram consultados:
@@ -130,11 +161,13 @@ Esse comportamento e esperado para `single types` com `draftAndPublish` ativo e 
 - Se o backend nao estiver rodando, o teste falha por erro de conexao.
 - Os contratos publicos foram desenhados para retorno simples e estavel.
 - Em `single types` publicados, o endpoint so responde `200` apos existir uma versao publicada.
+- O teste da integracao externa depende de rede e pode falhar se a Plataforma Conecta nao estiver acessivel.
 
 ## Resultado sintetico esperado
 
 Quando o ambiente esta pronto, o esperado e:
 
 - `npm run test:scripts` concluir sem falhas;
-- os seis testes de integracao retornarem `PASS`;
+- os seis testes de integracao locais retornarem `PASS`;
+- o teste `npm run test:integration:external-projects` retornar `PASS` quando a plataforma externa estiver acessivel;
 - os endpoints publicos responderem com `200` e objeto `data`.

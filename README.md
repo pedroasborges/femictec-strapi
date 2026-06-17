@@ -44,8 +44,59 @@ Variaveis importantes:
 - `TRANSFER_TOKEN_SALT`
 - `JWT_SECRET`
 - `ENCRYPTION_KEY`
+- `EMAIL_PROVIDER` para o envio de e-mails pelo Strapi
+- `EMAIL_DEFAULT_FROM` para o remetente padrao
+- `EMAIL_DEFAULT_REPLY_TO` para a resposta padrao
 - `DATABASE_CLIENT_LOCAL` para desenvolvimento
 - `DATABASE_CLIENT` para producao
+- `EXTERNAL_PROJECTS_API_URL` para integracao externa
+- `EXTERNAL_PROJECTS_API_TOKEN` para autenticacao na plataforma externa
+- `EXTERNAL_PROJECTS_API_METHOD` para forcar `POST`, `GET` ou deixar `AUTO`
+- `FEMICTEC_SYNC_SECRET` para proteger a sincronizacao manual interna
+
+Onde o token deve ser adicionado:
+
+- no Strapi local, em `.env` como `EXTERNAL_PROJECTS_API_TOKEN`
+- em producao, no segredo de ambiente do servidor, com o mesmo nome
+- no teste de integracao externo, via variavel de ambiente do terminal antes de executar `npm run test:integration:external-projects`
+- nunca dentro do codigo-fonte ou de arquivos versionados
+
+Bloco de exemplo para o `.env`:
+
+```env
+EXTERNAL_PROJECTS_API_URL=https://plataforma-external.example.com
+EXTERNAL_PROJECTS_API_TOKEN=coloque_o_token_aqui
+EMAIL_PROVIDER=nodemailer
+EMAIL_SMTP_HOST=127.0.0.1
+EMAIL_SMTP_PORT=25
+EMAIL_SMTP_SECURE=false
+EMAIL_SMTP_IGNORE_TLS=true
+EMAIL_DEFAULT_FROM=nao-responder@femictec.com.br
+EMAIL_DEFAULT_REPLY_TO=nao-responder@femictec.com.br
+EXTERNAL_PROJECTS_API_METHOD=AUTO
+FEMICTEC_SYNC_SECRET=coloque_o_segredo_de_sync_aqui
+```
+
+Bloco de exemplo para producao:
+
+```env
+EXTERNAL_PROJECTS_API_URL=https://plataforma-external.example.com
+EXTERNAL_PROJECTS_API_TOKEN=troque_no_servidor
+EMAIL_PROVIDER=nodemailer
+EMAIL_SMTP_HOST=mail.suaempresa.com
+EMAIL_SMTP_PORT=587
+EMAIL_SMTP_SECURE=false
+EMAIL_SMTP_IGNORE_TLS=false
+EMAIL_DEFAULT_FROM=nao-responder@femictec.com.br
+EMAIL_DEFAULT_REPLY_TO=nao-responder@femictec.com.br
+EXTERNAL_PROJECTS_API_METHOD=AUTO
+FEMICTEC_SYNC_SECRET=troque_no_servidor
+```
+
+Guia passo a passo da integracao externa:
+
+- veja [docs/INTEGRACAO-EXTERNA-PLATAFORMA-CONNECTA.md](./docs/INTEGRACAO-EXTERNA-PLATAFORMA-CONNECTA.md)
+- guia de e-mail de producao: [docs/CONFIGURACAO-EMAIL-PRODUCAO-STRAPI.md](./docs/CONFIGURACAO-EMAIL-PRODUCAO-STRAPI.md)
 
 No desenvolvimento, o projeto usa `sqlite` por padrao. Em producao, o padrao e `postgres`.
 
@@ -74,6 +125,7 @@ No desenvolvimento, o projeto usa `sqlite` por padrao. Em producao, o padrao e `
 
 Campos de data preparados no Strapi:
 
+- `slug`: identificador publico usado no link da noticia;
 - `dataPublicacao`: recebe a data de criacao da noticia e fica imutavel;
 - `dataUltimaEdicao`: recebe a data da ultima edicao;
 
@@ -83,6 +135,87 @@ Observacao:
 - depois disso, a data fica fixa e nao sofre nova alteracao manual;
 - se a noticia nunca for editada depois da criacao, `dataUltimaEdicao` fica igual a `dataPublicacao`;
 - nao existe mais agendamento por campo proprio nesta noticia.
+
+### Projeto e Resultado
+
+Os conteudos de `Projeto` e `Resultado` sao sincronizados a partir da plataforma externa informada na integracao desta conversa.
+`Resultado` pode ser derivado do mesmo retorno externo de projetos, filtrando apenas itens com `final_result_score` ou `final_result_concept`.
+
+Sincronizacao manual interna:
+
+- `POST /api/femictec/external-projects/sync`
+- requer o header `x-femictec-sync-secret`
+- aceita filtros como `project_name`, `event_name` e `edition_name`
+- nao publica automaticamente os registros no site
+- a integracao externa pode responder tanto em `POST` quanto em `GET`; por padrao o Strapi tenta `POST` e faz fallback para `GET` em modo `AUTO`
+
+Teste de integracao dedicado:
+
+- `npm run test:integration:external-projects`
+- requer `EXTERNAL_PROJECTS_API_URL` e `EXTERNAL_PROJECTS_API_TOKEN`
+- valida o contrato da Plataforma Conecta usado na importacao
+
+### Contato e envio de mensagem
+
+Fluxo de formulario do site:
+
+- `POST /api/mensagens-contatos/submit`
+- grava a mensagem em `Mensagens de Contato`
+- envia um e-mail para os destinatarios configurados no `Contato`
+- envia uma confirmacao para o e-mail informado pelo usuario
+
+Campos esperados no `POST`:
+
+- `nome`
+- `email`
+- `assunto`
+- `mensagem`
+
+Configuracao de e-mail:
+
+- use `EMAIL_PROVIDER=nodemailer` para SMTP no Windows, apontando para o servidor local de teste ou o SMTP real do servidor;
+- para testes locais com `smtp4dev`, use `EMAIL_SMTP_HOST=127.0.0.1`, `EMAIL_SMTP_PORT=25` e `EMAIL_SMTP_IGNORE_TLS=true`;
+- `EMAIL_DEFAULT_FROM` e `EMAIL_DEFAULT_REPLY_TO` funcionam como fallback;
+- o e-mail principal do `Contato` continua sendo a fonte de destinatarios e remetente principal.
+
+Exemplo de consumo no `nextJs`:
+
+```ts
+await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/mensagens-contatos/submit`, {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({
+    nome,
+    email,
+    assunto,
+    mensagem,
+  }),
+});
+```
+
+No frontend:
+
+- valide os campos antes do `fetch`;
+- mostre uma mensagem de sucesso somente apos resposta `201`;
+- em caso de erro, exiba o retorno vindo do Strapi;
+- nao tente enviar e-mail direto do browser.
+
+Resumo do modelo:
+
+- `origemId`: id unico da fonte externa;
+- `titulo` e `resumo`: dados base importados da plataforma;
+- `escola`, `area`, `orientador` e `participantesNomes`: informacoes consolidadas do projeto;
+- `eventoNome`, `eventoSlug`, `edicaoNome`, `edicaoSlug`: referencia da edicao de origem;
+- `statusExterno`, `notaFinal`, `conceitoFinal`, `dataSubmissao` e `fontePayload`: rastreio e auditoria da importacao;
+- `descricao`, `imagem`, `arquivo` e `categoria`: campos editoriais locais.
+
+Regra de exibicao publica:
+
+- o Strapi so envia para o site registros com `publishedAt` preenchido;
+- o status externo nao substitui a publicacao administrativa;
+- o registro pode ser importado da plataforma externa, mas continua controlado pelo fluxo editorial do CMS.
 
 ### Estrutura da Home
 

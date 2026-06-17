@@ -888,96 +888,8 @@ export interface ApiNoticiaNoticia extends Struct.CollectionTypeSchema {
         maxLength: 255;
       }>;
     publishedAt: Schema.Attribute.DateTime;
-    titulo: Schema.Attribute.String;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-  };
-}
-
-export interface ApiProjetoProjeto extends Struct.CollectionTypeSchema {
-  collectionName: 'projetos';
-  info: {
-    displayName: 'Projeto';
-    pluralName: 'projetos';
-    singularName: 'projeto';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    area: Schema.Attribute.String & Schema.Attribute.SetMinMaxLength<{
-      maxLength: 255;
-    }>;
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    descricao: Schema.Attribute.Blocks;
-    escola: Schema.Attribute.String & Schema.Attribute.SetMinMaxLength<{
-      maxLength: 255;
-    }>;
-    imagem: Schema.Attribute.Media<'images'>;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::projeto.projeto'
-    > &
-      Schema.Attribute.Private;
-    participantes: Schema.Attribute.Integer &
-      Schema.Attribute.SetMinMax<
-        {
-          min: 0;
-        },
-        number
-      > &
-      Schema.Attribute.DefaultTo<0>;
-    publishedAt: Schema.Attribute.DateTime;
-    titulo: Schema.Attribute.String &
-      Schema.Attribute.Required &
-      Schema.Attribute.SetMinMaxLength<{
-        maxLength: 180;
-      }>;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-  };
-}
-
-export interface ApiResultadoResultado extends Struct.CollectionTypeSchema {
-  collectionName: 'resultados';
-  info: {
-    displayName: 'Resultado';
-    pluralName: 'resultados';
-    singularName: 'resultado';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    arquivo: Schema.Attribute.Media<'files'>;
-    categoria: Schema.Attribute.String & Schema.Attribute.SetMinMaxLength<{
-      maxLength: 120;
-    }>;
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    descricao: Schema.Attribute.Blocks;
-    edicao: Schema.Attribute.String & Schema.Attribute.SetMinMaxLength<{
-      maxLength: 120;
-    }>;
-    imagem: Schema.Attribute.Media<'images'>;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::resultado.resultado'
-    > &
-      Schema.Attribute.Private;
-    publishedAt: Schema.Attribute.DateTime;
-    titulo: Schema.Attribute.String &
-      Schema.Attribute.Required &
-      Schema.Attribute.SetMinMaxLength<{
-        maxLength: 180;
-      }>;
+    slug: Schema.Attribute.UID<'titulo'> & Schema.Attribute.Required;
+    titulo: Schema.Attribute.String & Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1016,6 +928,92 @@ export interface ApiPoliticaDePrivacidadePoliticaDePrivacidade
   };
 }
 
+export interface ApiProjetoProjeto extends Struct.CollectionTypeSchema {
+  collectionName: 'projetos';
+  info: {
+    displayName: 'Projeto';
+    pluralName: 'projetos';
+    singularName: 'projeto';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    area: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 255;
+      }>;
+    conceitoFinal: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 120;
+      }>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    dataSubmissao: Schema.Attribute.DateTime;
+    descricao: Schema.Attribute.Blocks;
+    edicaoNome: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 255;
+      }>;
+    edicaoSlug: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 255;
+      }>;
+    escola: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 255;
+      }>;
+    eventoNome: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 255;
+      }>;
+    eventoSlug: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 255;
+      }>;
+    fontePayload: Schema.Attribute.JSON;
+    imagem: Schema.Attribute.Media<'images'>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::projeto.projeto'
+    > &
+      Schema.Attribute.Private;
+    notaFinal: Schema.Attribute.Decimal;
+    orientador: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 255;
+      }>;
+    origemId: Schema.Attribute.Integer &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
+    participantes: Schema.Attribute.Integer &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 0;
+        },
+        number
+      > &
+      Schema.Attribute.DefaultTo<0>;
+    participantesNomes: Schema.Attribute.JSON;
+    publishedAt: Schema.Attribute.DateTime;
+    resumo: Schema.Attribute.Text;
+    statusExterno: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 120;
+      }>;
+    titulo: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 180;
+      }>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiRegulamentoRegulamento extends Struct.SingleTypeSchema {
   collectionName: 'regulamentos';
   info: {
@@ -1044,6 +1042,94 @@ export interface ApiRegulamentoRegulamento extends Struct.SingleTypeSchema {
     publishedAt: Schema.Attribute.DateTime;
     subtitulo: Schema.Attribute.String;
     titulo: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiResultadoResultado extends Struct.CollectionTypeSchema {
+  collectionName: 'resultados';
+  info: {
+    displayName: 'Resultado';
+    pluralName: 'resultados';
+    singularName: 'resultado';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    area: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 255;
+      }>;
+    arquivo: Schema.Attribute.Media<'files'>;
+    avaliadoresNomes: Schema.Attribute.JSON;
+    categoria: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 120;
+      }>;
+    conceitoFinal: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 120;
+      }>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    dataSubmissao: Schema.Attribute.DateTime;
+    descricao: Schema.Attribute.Blocks;
+    edicao: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 120;
+      }>;
+    edicaoNome: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 255;
+      }>;
+    edicaoSlug: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 255;
+      }>;
+    escola: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 255;
+      }>;
+    fontePayload: Schema.Attribute.JSON;
+    imagem: Schema.Attribute.Media<'images'>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::resultado.resultado'
+    > &
+      Schema.Attribute.Private;
+    notaFinal: Schema.Attribute.Decimal;
+    orientador: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 255;
+      }>;
+    origemId: Schema.Attribute.Integer &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
+    participantes: Schema.Attribute.Integer &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 0;
+        },
+        number
+      > &
+      Schema.Attribute.DefaultTo<0>;
+    participantesNomes: Schema.Attribute.JSON;
+    publishedAt: Schema.Attribute.DateTime;
+    resumo: Schema.Attribute.Text;
+    statusExterno: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 120;
+      }>;
+    titulo: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 180;
+      }>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1606,8 +1692,8 @@ declare module '@strapi/strapi' {
       'api::mensagens-contato.mensagens-contato': ApiMensagensContatoMensagensContato;
       'api::navbar.navbar': ApiNavbarNavbar;
       'api::noticia.noticia': ApiNoticiaNoticia;
-      'api::projeto.projeto': ApiProjetoProjeto;
       'api::politica-de-privacidade.politica-de-privacidade': ApiPoliticaDePrivacidadePoliticaDePrivacidade;
+      'api::projeto.projeto': ApiProjetoProjeto;
       'api::regulamento.regulamento': ApiRegulamentoRegulamento;
       'api::resultado.resultado': ApiResultadoResultado;
       'api::termo-de-uso.termo-de-uso': ApiTermoDeUsoTermoDeUso;

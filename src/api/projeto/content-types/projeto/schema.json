@@ -11,10 +11,18 @@
   },
   "pluginOptions": {},
   "attributes": {
+    "origemId": {
+      "type": "integer",
+      "required": true,
+      "unique": true
+    },
     "titulo": {
       "type": "string",
       "required": true,
       "maxLength": 180
+    },
+    "resumo": {
+      "type": "text"
     },
     "descricao": {
       "type": "blocks"
@@ -27,10 +35,50 @@
       "type": "string",
       "maxLength": 255
     },
+    "orientador": {
+      "type": "string",
+      "maxLength": 255
+    },
     "participantes": {
       "type": "integer",
       "min": 0,
       "default": 0
+    },
+    "participantesNomes": {
+      "type": "json"
+    },
+    "eventoNome": {
+      "type": "string",
+      "maxLength": 255
+    },
+    "eventoSlug": {
+      "type": "string",
+      "maxLength": 255
+    },
+    "edicaoNome": {
+      "type": "string",
+      "maxLength": 255
+    },
+    "edicaoSlug": {
+      "type": "string",
+      "maxLength": 255
+    },
+    "statusExterno": {
+      "type": "string",
+      "maxLength": 120
+    },
+    "notaFinal": {
+      "type": "decimal"
+    },
+    "conceitoFinal": {
+      "type": "string",
+      "maxLength": 120
+    },
+    "dataSubmissao": {
+      "type": "datetime"
+    },
+    "fontePayload": {
+      "type": "json"
     },
     "imagem": {
       "type": "media",
