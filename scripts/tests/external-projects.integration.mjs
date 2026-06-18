@@ -18,7 +18,8 @@ if (!token) {
   );
 }
 
-const endpoint = new URL('/integrations/projects', baseUrl);
+const normalizedBaseUrl = baseUrl.endsWith('/') ? baseUrl : `${baseUrl}/`;
+const endpoint = new URL('integrations/projects', normalizedBaseUrl);
 const requestBody = {
   page: 1,
   page_size: 5,

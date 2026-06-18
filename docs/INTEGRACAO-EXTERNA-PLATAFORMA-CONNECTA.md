@@ -7,8 +7,8 @@ O objetivo e registrar o contrato usado, onde configurar o token e como validar 
 
 A integracao consulta a Plataforma Conecta em:
 
-- `POST /integrations/projects`
-- `GET /integrations/projects`
+- `POST /api/integrations/projects`
+- `GET /api/integrations/projects`
 
 O Strapi usa esse retorno para importar:
 

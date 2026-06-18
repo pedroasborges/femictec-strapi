@@ -2,7 +2,7 @@ const DEFAULT_PAGE_SIZE = 50;
 const MIN_PAGE_SIZE = 1;
 const MAX_PAGE_SIZE = 200;
 const DEFAULT_EXTERNAL_METHOD = 'AUTO';
-const EXTERNAL_PROJECTS_PATH = '/integrations/projects';
+const EXTERNAL_PROJECTS_PATH = 'integrations/projects';
 
 const PROJECT_UID = 'api::projeto.projeto';
 const RESULT_UID = 'api::resultado.resultado';
@@ -271,7 +271,8 @@ const buildExternalProjectsUrl = (
   pageSize: number,
   filters: ExternalProjectsIntegrationFilters
 ) => {
-  const endpoint = new URL(EXTERNAL_PROJECTS_PATH, baseUrl);
+  const normalizedBaseUrl = baseUrl.endsWith('/') ? baseUrl : `${baseUrl}/`;
+  const endpoint = new URL(EXTERNAL_PROJECTS_PATH, normalizedBaseUrl);
   endpoint.searchParams.set('page', String(page));
   endpoint.searchParams.set('page_size', String(pageSize));
 
