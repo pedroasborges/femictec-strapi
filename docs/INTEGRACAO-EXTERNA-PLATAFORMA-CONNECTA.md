@@ -3,6 +3,10 @@
 Este guia descreve como a rota externa de consulta de projetos foi integrada ao Strapi da FEMICTEC.
 O objetivo e registrar o contrato usado, onde configurar o token e como validar a importacao ponta a ponta.
 
+Se voce quiser ver o fluxo operacional completo do dado ate as estatisticas publicas, consulte:
+
+- [docs/FLUXO-CONECTA-PARA-ESTATISTICAS.md](./FLUXO-CONECTA-PARA-ESTATISTICAS.md)
+
 ## 1. Visao geral
 
 A integracao consulta a Plataforma Conecta em:

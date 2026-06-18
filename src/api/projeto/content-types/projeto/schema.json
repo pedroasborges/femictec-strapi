@@ -80,6 +80,10 @@
     "fontePayload": {
       "type": "json"
     },
+    "publico": {
+      "type": "boolean",
+      "default": false
+    },
     "imagem": {
       "type": "media",
       "multiple": false,

@@ -13,6 +13,7 @@
     "ops:push": "node scripts/push-git.mjs",
     "ops:deploy": "node scripts/deploy-cloud.mjs",
     "ops:push-deploy": "node scripts/push-and-deploy.mjs",
+    "ops:sync-external-projects": "powershell -ExecutionPolicy Bypass -File ./scripts/sync-external-projects.ps1",
     "start": "node ./node_modules/@strapi/strapi/bin/strapi.js start",
     "strapi": "node ./node_modules/@strapi/strapi/bin/strapi.js",
     "test:scripts": "node scripts/tests/run-tests.mjs",
@@ -26,6 +27,7 @@
     "test:all": "npm run test:scripts && npm run test:integration:current-event && npm run test:integration:stats && npm run test:integration:projects && npm run test:integration:project-detail && npm run test:integration:results && npm run test:integration:schedule",
     "upgrade": "npx @strapi/upgrade latest",
     "upgrade:dry": "npx @strapi/upgrade latest --dry"
+    
   },
   "dependencies": {
     "@strapi/plugin-cloud": "5.43.0",

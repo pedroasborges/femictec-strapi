@@ -997,6 +997,7 @@ export interface ApiProjetoProjeto extends Struct.CollectionTypeSchema {
       > &
       Schema.Attribute.DefaultTo<0>;
     participantesNomes: Schema.Attribute.JSON;
+    publico: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     publishedAt: Schema.Attribute.DateTime;
     resumo: Schema.Attribute.Text;
     statusExterno: Schema.Attribute.String &

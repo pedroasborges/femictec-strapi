@@ -153,6 +153,9 @@ const buildProjectsFilters = (query: Record<string, unknown>) => {
     publishedAt: {
       $notNull: true,
     },
+    publico: {
+      $eq: true,
+    },
   };
 
   const clauses: Record<string, unknown>[] = [];
@@ -247,7 +250,7 @@ const buildResultsFilters = (query: Record<string, unknown>) => {
   return filters;
 };
 
-const normalizeProject = (item: unknown) => {
+const normalizePublicProject = (item: unknown) => {
   if (!item || typeof item !== 'object') {
     return null;
   }
@@ -255,48 +258,22 @@ const normalizeProject = (item: unknown) => {
   const project = item as {
     id?: unknown;
     documentId?: unknown;
-    origemId?: unknown;
     titulo?: unknown;
-    resumo?: unknown;
     descricao?: unknown;
     escola?: unknown;
     area?: unknown;
-    orientador?: unknown;
     participantes?: unknown;
-    participantesNomes?: unknown;
-    eventoNome?: unknown;
-    eventoSlug?: unknown;
-    edicaoNome?: unknown;
-    edicaoSlug?: unknown;
-    statusExterno?: unknown;
-    notaFinal?: unknown;
-    conceitoFinal?: unknown;
-    dataSubmissao?: unknown;
-    fontePayload?: unknown;
     imagem?: unknown;
   };
 
   return {
     id: normalizeInteger(project.id),
     documentId: normalizeText(project.documentId),
-    origemId: normalizeInteger(project.origemId),
     titulo: normalizeText(project.titulo),
-    resumo: normalizeText(project.resumo),
     descricao: Array.isArray(project.descricao) ? project.descricao : [],
     escola: normalizeText(project.escola),
     area: normalizeText(project.area),
-    orientador: normalizeText(project.orientador),
     participantes: normalizeInteger(project.participantes),
-    participantesNomes: normalizeJson(project.participantesNomes),
-    eventoNome: normalizeText(project.eventoNome),
-    eventoSlug: normalizeText(project.eventoSlug),
-    edicaoNome: normalizeText(project.edicaoNome),
-    edicaoSlug: normalizeText(project.edicaoSlug),
-    statusExterno: normalizeText(project.statusExterno),
-    notaFinal: normalizeDecimal(project.notaFinal),
-    conceitoFinal: normalizeText(project.conceitoFinal),
-    dataSubmissao: normalizeText(project.dataSubmissao),
-    fontePayload: normalizeJson(project.fontePayload),
     imagem: sanitizeMedia(project.imagem),
   };
 };
@@ -590,7 +567,10 @@ export default factories.createCoreController('api::femictec.femictec', ({ strap
       return;
     }
 
-    const where = { publishedAt: { $notNull: true } };
+    const where = {
+      publishedAt: { $notNull: true },
+      publico: { $eq: true },
+    };
     const rows = await strapi.db.query(PROJECT_UID).findMany({
       where,
       select: ['escola', 'area', 'participantes'],
@@ -648,7 +628,9 @@ export default factories.createCoreController('api::femictec.femictec', ({ strap
     ]);
 
     const data = Array.isArray(items)
-      ? items.map(normalizeProject).filter((item): item is NonNullable<ReturnType<typeof normalizeProject>> => item !== null)
+      ? items
+          .map(normalizePublicProject)
+          .filter((item): item is NonNullable<ReturnType<typeof normalizePublicProject>> => item !== null)
       : [];
 
     ctx.body = {
@@ -684,6 +666,9 @@ export default factories.createCoreController('api::femictec.femictec', ({ strap
         publishedAt: {
           $notNull: true,
         },
+        publico: {
+          $eq: true,
+        },
       },
       populate: {
         imagem: true,
@@ -706,7 +691,7 @@ export default factories.createCoreController('api::femictec.femictec', ({ strap
     }
 
     ctx.body = {
-      data: normalizeProject(item),
+      data: normalizePublicProject(item),
     };
   },
 

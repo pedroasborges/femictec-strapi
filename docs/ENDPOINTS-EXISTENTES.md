@@ -132,7 +132,8 @@ Gerados automaticamente por `createCoreRouter(...)`.
 
 ## 3. Regras publicas importantes
 
-- Os projetos so sao exibidos publicamente quando estiverem publicados e liberados pela administracao da FEMICTEC.
+- Os projetos so sao exibidos publicamente quando estiverem publicados e marcados como `publico` pela administracao da FEMICTEC.
+- Os totais de `stats` usam o mesmo critério de visibilidade: apenas projetos publicados e `publico=true`.
 - Os resultados so sao exibidos publicamente apos publicacao administrativa explicita.
 - As rotas publicas customizadas usam `auth: false`.
 - O frontend deve consumir `/api/public/femictec/*` quando precisar do contrato enxuto e controlado.
@@ -191,6 +192,7 @@ O passo a passo completo da construcao e configuracao da integracao esta em:
 | `conceitoFinal` | `final_result_concept` | Conceito final consolidado |
 | `dataSubmissao` | `submitted_at` | Data/hora da submissao |
 | `fontePayload` | payload bruto | Guarda a resposta original para auditoria e reimportacao |
+| `publico` | flag editorial local | Controla se o projeto pode aparecer nas rotas publicas |
 
 ### Mapeamento para `Resultado`
 
@@ -258,6 +260,7 @@ Observacoes:
 - o endpoint nao publica automaticamente os registros, apenas atualiza os dados internos;
 - o conector suporta `POST` e `GET` na API externa, com `AUTO` como comportamento padrao;
 - `descricao`, `imagem`, `arquivo` e outros campos editoriais continuam sob controle humano.
+- `publico` e a flag editorial que libera o projeto para as rotas publicas.
 
 ## 5. Contato e envio de mensagem
 

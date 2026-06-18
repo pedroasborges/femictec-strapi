@@ -11,6 +11,10 @@ Objetivo:
 - validar a integracao externa da Plataforma Conecta;
 - documentar o que foi verificado de forma operacional.
 
+Para o fluxo ponta a ponta dos dados entre a Conecta e as estatisticas publicas:
+
+- [docs/FLUXO-CONECTA-PARA-ESTATISTICAS.md](./FLUXO-CONECTA-PARA-ESTATISTICAS.md)
+
 ## Testes de scripts
 
 Comando:
@@ -114,6 +118,7 @@ Valida:
 - `projects/:id`: detalhe publico com campos permitidos;
 - `results`: listagem publica paginada;
 - ambos respeitam a regra de exibicao apenas apos liberacao/publicacao administrativa.
+- no caso de `Projeto`, o item tambem precisa estar marcado como `publico` no CMS.
 
 ### Integracao externa
 
@@ -128,6 +133,20 @@ Valida:
 - chaves permitidas em `items`;
 - estrutura de `event` e `edition`;
 - uso do endpoint `POST /integrations/projects`.
+
+Para executar a sincronizacao interna no Windows sem exportar variaveis manualmente:
+
+```powershell
+.\scripts\sync-external-projects.ps1
+```
+
+O script le `FEMICTEC_SYNC_SECRET` do `.env`, envia o segredo no header `x-femictec-sync-secret` e chama:
+
+```http
+POST /api/femictec/external-projects/sync
+```
+
+Se precisar, ajuste `-PageSize`, `-MaxPages`, `-Uri` ou `-EnvPath`.
 
 ### Formulario de contato
 
