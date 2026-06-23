@@ -18,13 +18,13 @@ const config = ({ env }: Core.Config.Shared.ConfigParams): Core.Config.Plugin =>
                       pass: env('EMAIL_SMTP_PASS'),
                     }
                   : undefined,
-              rejectUnauthorized: env.bool('EMAIL_SMTP_REJECT_UNAUTHORIZED', true),
+              tls: {
+                rejectUnauthorized: env.bool('EMAIL_SMTP_REJECT_UNAUTHORIZED', false),
+              },
+              
             }
-          : {
-              sendmail: true,
-              newline: 'unix',
-              path: env('EMAIL_SENDMAIL_PATH', '/usr/sbin/sendmail'),
-            }),
+     
+      : {}),
       },
       settings: {
         defaultFrom: env('EMAIL_DEFAULT_FROM', env('EMAIL_FROM', 'nao-responder@femictec.com.br')),
