@@ -6,10 +6,13 @@
   "options": {},
   "attributes": {
     "horario": {
-      "type": "string"
+      "type": "string",
+      "default": "Horário a definir",
+      "maxLength": 20
     },
     "titulo": {
-      "type": "string"
+      "type": "string",
+      "maxLength": 25
     }
   },
   "config": {}

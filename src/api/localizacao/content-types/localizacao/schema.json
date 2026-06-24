@@ -12,16 +12,21 @@
   "pluginOptions": {},
   "attributes": {
     "titulo": {
-      "type": "string"
+      "type": "string",
+      "default": "Localização em manutenção",
+      "maxLength": 25
     },
     "descricao": {
       "type": "text"
     },
     "endereco": {
-      "type": "string"
+      "type": "string",
+      "default": "Endereço:",
+      "maxLength": 100
     },
     "coordenadas": {
-      "type": "string"
+      "type": "string",
+      "maxLength": 50
     }
   }
 }

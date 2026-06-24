@@ -22,16 +22,19 @@
       ]
     },
     "textoInscricao": {
-      "type": "text"
+      "type": "text",
+      "maxLength": 500
     },
     "linkPlataforma": {
-      "type": "string"
+      "type": "string",
+      "maxLength": 25
     },
     "dataLimite": {
       "type": "date"
     },
     "tituloResumo": {
-      "type": "string"
+      "type": "string",
+      "maxLength": 25
     },
     "textoResumo": {
       "type": "text"
@@ -41,4 +44,3 @@
     }
   }
 }
-

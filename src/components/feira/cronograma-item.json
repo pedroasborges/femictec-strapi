@@ -6,10 +6,13 @@
   "options": {},
   "attributes": {
     "atividade": {
-      "type": "string"
+      "type": "string",
+      "default": "Atividade",
+      "maxLength": 100
     },
     "data": {
-      "type": "string"
+      "type": "string",
+      "maxLength": 23
     }
   },
   "config": {}

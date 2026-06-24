@@ -6,10 +6,14 @@
   "options": {},
   "attributes": {
     "dia": {
-      "type": "string"
+      "type": "string",
+      "default": "Dia a definir",
+      "maxLength": 25
     },
     "data": {
-      "type": "string"
+      "type": "string",
+      "default": "Data a definir",
+      "maxLength": 25
     },
     "atividades": {
       "type": "component",

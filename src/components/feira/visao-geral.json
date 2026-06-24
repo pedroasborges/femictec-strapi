@@ -6,7 +6,9 @@
   "options": {},
   "attributes": {
     "edicaoTitulo": {
-      "type": "string"
+      "type": "string",
+      "default": "Edição",
+      "maxLength": 20
     },
     "edicaoDescricao": {
       "type": "text"
@@ -19,22 +21,29 @@
       ]
     },
     "tematicaImagemAlt": {
-      "type": "string"
+      "type": "string",
+      "maxLength": 50
     },
     "objetivosTitulo": {
-      "type": "string"
+      "type": "string",
+      "default": "Objetivos",
+      "maxLength": 20
     },
     "objetivosDescricao": {
       "type": "text"
     },
     "regulamentoTitulo": {
-      "type": "string"
+      "type": "string",
+      "default": "Regulamento",
+      "maxLength": 20
     },
     "regulamentoLabel": {
-      "type": "string"
+      "type": "string",
+      "maxLength": 100
     },
     "regulamentoUrl": {
-      "type": "string"
+      "type": "string",
+      "maxLength": 50
     }
   },
   "config": {}

@@ -6,10 +6,12 @@
   "options": {},
   "attributes": {
     "nome": {
-      "type": "string"
+      "type": "string",
+      "maxLength": 50
     },
     "email": {
-      "type": "email"
+      "type": "email",
+      "maxLength": 30
     }
   },
   "config": {}

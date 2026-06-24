@@ -6,10 +6,13 @@
   "options": {},
   "attributes": {
     "cronogramaTitulo": {
-      "type": "string"
+      "type": "string",
+      "default": "Cronograma",
+      "maxLength": 20
     },
     "dataRealizacao": {
-      "type": "string"
+      "type": "string",
+      "maxLength": 23
     },
     "cronogramaItens": {
       "type": "component",
@@ -24,7 +27,8 @@
       ]
     },
     "mapaImagemAlt": {
-      "type": "string"
+      "type": "string",
+      "maxLength": 100
     }
   },
   "config": {}

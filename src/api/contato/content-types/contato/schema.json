@@ -12,10 +12,13 @@
   "pluginOptions": {},
   "attributes": {
     "titulo": {
-      "type": "string"
+      "type": "string",
+      "default": "Ligue para a femictec",
+      "maxLength": 20
     },
     "subtitulo": {
-      "type": "string"
+      "type": "string",
+      "maxLength": 20
     },
     "descricao": {
       "type": "text"
@@ -24,10 +27,12 @@
       "type": "email"
     },
     "telefone": {
-      "type": "string"
+      "type": "string",
+      "maxLength": 25
     },
     "endereco": {
-      "type": "string"
+      "type": "string",
+      "maxLength": 100
     },
     "destinatariosEvento": {
       "type": "component",

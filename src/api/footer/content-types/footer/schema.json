@@ -15,17 +15,20 @@
       "type": "email"
     },
     "Telefone": {
-      "type": "string"
+      "type": "string",
+      "maxLength": 25
     },
     "Instagram": {
-      "type": "string"
+      "type": "string",
+      "maxLength": 25
     },
     "Facebook": {
-      "type": "string"
+      "type": "string",
+      "maxLength": 25
     },
     "Youtube": {
-      "type": "string"
+      "type": "string",
+      "maxLength": 25
     }
   }
 }
-
