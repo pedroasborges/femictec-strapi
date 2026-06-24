@@ -739,12 +739,33 @@ export interface ApiHomeDataHomeData extends Struct.SingleTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    etapa1Data: Schema.Attribute.String;
-    etapa1Titulo: Schema.Attribute.String;
-    etapa2Data: Schema.Attribute.String;
-    etapa2Titulo: Schema.Attribute.String;
-    etapa3Data: Schema.Attribute.String;
-    etapa3Titulo: Schema.Attribute.String;
+    etapa1Data: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 12;
+      }> &
+      Schema.Attribute.DefaultTo<'Submiss\u00E3o'>;
+    etapa1Titulo: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 20;
+      }>;
+    etapa2Data: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 12;
+      }> &
+      Schema.Attribute.DefaultTo<'Avalia\u00E7\u00E3o'>;
+    etapa2Titulo: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 20;
+      }>;
+    etapa3Data: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 12;
+      }> &
+      Schema.Attribute.DefaultTo<'Resultados'>;
+    etapa3Titulo: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 20;
+      }>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',

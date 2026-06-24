@@ -15,23 +15,31 @@
       "type": "string"
     },
     "etapa1Titulo": {
-      "type": "string"
+      "type": "string",
+      "maxLength": 20
     },
     "etapa1Data": {
-      "type": "string"
+      "type": "string",
+      "default": "Submissão",
+      "maxLength": 12
     },
     "etapa2Titulo": {
-      "type": "string"
+      "type": "string",
+      "maxLength": 20
     },
     "etapa2Data": {
-      "type": "string"
+      "type": "string",
+      "default": "Avaliação",
+      "maxLength": 12
     },
     "etapa3Titulo": {
-      "type": "string"
+      "type": "string",
+      "maxLength": 20
     },
     "etapa3Data": {
-      "type": "string"
+      "type": "string",
+      "default": "Resultados",
+      "maxLength": 12
     }
   }
 }
-
