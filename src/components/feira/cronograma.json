@@ -1,0 +1,35 @@
+{
+  "collectionName": "components_feira_cronogramas",
+  "info": {
+    "displayName": "cronograma"
+  },
+  "options": {},
+  "attributes": {
+    "cronogramaTitulo": {
+      "type": "string",
+      "default": "Cronograma",
+      "maxLength": 20
+    },
+    "dataRealizacao": {
+      "type": "string",
+      "maxLength": 23
+    },
+    "cronogramaItens": {
+      "type": "component",
+      "component": "feira.cronograma-item",
+      "repeatable": true
+    },
+    "mapaImagem": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "mapaImagemAlt": {
+      "type": "string",
+      "maxLength": 100
+    }
+  },
+  "config": {}
+}

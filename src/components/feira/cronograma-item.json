@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_feira_cronograma_items",
+  "info": {
+    "displayName": "cronograma-item"
+  },
+  "options": {},
+  "attributes": {
+    "atividade": {
+      "type": "string",
+      "default": "Atividade",
+      "maxLength": 100
+    },
+    "data": {
+      "type": "string",
+      "maxLength": 23
+    }
+  },
+  "config": {}
+}

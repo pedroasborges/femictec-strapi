@@ -1,0 +1,26 @@
+{
+  "collectionName": "components_femictec_parceiro_items",
+  "info": {
+    "displayName": "parceiro-item"
+  },
+  "options": {},
+  "attributes": {
+    "nome": {
+      "type": "string"
+    },
+    "logo": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "siteUrl": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}

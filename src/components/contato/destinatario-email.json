@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_contato_destinatario_emails",
+  "info": {
+    "displayName": "destinatario-email"
+  },
+  "options": {},
+  "attributes": {
+    "nome": {
+      "type": "string",
+      "maxLength": 50
+    },
+    "email": {
+      "type": "email",
+      "maxLength": 30
+    }
+  },
+  "config": {}
+}

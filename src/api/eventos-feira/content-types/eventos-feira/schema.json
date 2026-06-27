@@ -1,0 +1,37 @@
+{
+  "kind": "collectionType",
+  "collectionName": "eventos_feiras",
+  "info": {
+    "singularName": "eventos-feira",
+    "pluralName": "eventos-feiras",
+    "displayName": "Eventos_feira"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "nomeEvento": {
+      "type": "string"
+    },
+    "descricao": {
+      "type": "string"
+    },
+    "miniDescricao": {
+      "type": "string"
+    },
+    "imagemEvento": {
+      "type": "media",
+      "multiple": true,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "dataHorario": {
+      "type": "datetime"
+    }
+  }
+}

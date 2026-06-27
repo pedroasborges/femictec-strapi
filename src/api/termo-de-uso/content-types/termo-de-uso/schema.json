@@ -1,0 +1,27 @@
+{
+  "kind": "singleType",
+  "collectionName": "termo_de_usos",
+  "info": {
+    "singularName": "termo-de-uso",
+    "pluralName": "termo-de-usos",
+    "displayName": "Termo de Uso"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "titulo": {
+      "type": "string"
+    },
+    "subtitulo": {
+      "type": "string"
+    },
+    "conteudo": {
+      "type": "text"
+    },
+    "atualizadoEm": {
+      "type": "string"
+    }
+  }
+}

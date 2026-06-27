@@ -1,0 +1,45 @@
+{
+  "kind": "singleType",
+  "collectionName": "home_datas",
+  "info": {
+    "singularName": "home-data",
+    "pluralName": "home-datas",
+    "displayName": "Home - Datas"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "tituloSecao": {
+      "type": "string"
+    },
+    "etapa1Titulo": {
+      "type": "string",
+      "maxLength": 20
+    },
+    "etapa1Data": {
+      "type": "string",
+      "default": "Submissão",
+      "maxLength": 12
+    },
+    "etapa2Titulo": {
+      "type": "string",
+      "maxLength": 20
+    },
+    "etapa2Data": {
+      "type": "string",
+      "default": "Avaliação",
+      "maxLength": 12
+    },
+    "etapa3Titulo": {
+      "type": "string",
+      "maxLength": 20
+    },
+    "etapa3Data": {
+      "type": "string",
+      "default": "Resultados",
+      "maxLength": 12
+    }
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "kind": "singleType",
+  "collectionName": "contatos",
+  "info": {
+    "singularName": "contato",
+    "pluralName": "contatos",
+    "displayName": "Contato"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "titulo": {
+      "type": "string",
+      "default": "Ligue para a femictec",
+      "maxLength": 20
+    },
+    "subtitulo": {
+      "type": "string",
+      "maxLength": 20
+    },
+    "descricao": {
+      "type": "text"
+    },
+    "email": {
+      "type": "email"
+    },
+    "telefone": {
+      "type": "string",
+      "maxLength": 25
+    },
+    "endereco": {
+      "type": "string",
+      "maxLength": 100
+    },
+    "destinatariosEvento": {
+      "type": "component",
+      "component": "contato.destinatario-email",
+      "repeatable": true
+    },
+    "notificacaoAssuntoTemplate": {
+      "type": "string"
+    },
+    "notificacaoMensagemTemplate": {
+      "type": "text"
+    },
+    "confirmacaoAssuntoTemplate": {
+      "type": "string"
+    },
+    "confirmacaoMensagemTemplate": {
+      "type": "text"
+    }
+  }
+}

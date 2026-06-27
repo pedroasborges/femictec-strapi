@@ -1,0 +1,41 @@
+{
+  "kind": "collectionType",
+  "collectionName": "mensagens_contatos",
+  "info": {
+    "singularName": "mensagens-contato",
+    "pluralName": "mensagens-contatos",
+    "displayName": "Mensagens Contato"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "nome": {
+      "type": "string",
+      "required": true
+    },
+    "email": {
+      "type": "email",
+      "required": true
+    },
+    "assunto": {
+      "type": "string",
+      "required": true
+    },
+    "mensagem": {
+      "type": "text",
+      "required": true
+    },
+    "anexo": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    }
+  }
+}

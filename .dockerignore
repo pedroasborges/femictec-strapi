@@ -1,0 +1,10 @@
+.git
+.gitignore
+.tmp
+build
+dist
+node_modules
+npm-debug.log
+README.md
+public/uploads
+!public/uploads/.gitkeep

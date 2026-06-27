@@ -1,0 +1,26 @@
+services:
+  strapi:
+    container_name: femictec-backend
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    env_file:
+      - ${ENV_FILE:-.env}
+    environment:
+      NODE_ENV: production
+    ports:
+      - "${PORT:-1337}:1337"
+    volumes:
+      - strapi_uploads:/opt/app/public/uploads
+      - strapi_tmp:/opt/app/.tmp
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:1337/_health').then((r)=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+
+volumes:
+  strapi_uploads:
+  strapi_tmp:

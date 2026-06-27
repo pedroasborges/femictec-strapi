@@ -1,0 +1,25 @@
+{
+  "collectionName": "components_feira_programacao_dias",
+  "info": {
+    "displayName": "programacao-dia"
+  },
+  "options": {},
+  "attributes": {
+    "dia": {
+      "type": "string",
+      "default": "Dia a definir",
+      "maxLength": 25
+    },
+    "data": {
+      "type": "string",
+      "default": "Data a definir",
+      "maxLength": 25
+    },
+    "atividades": {
+      "type": "component",
+      "component": "feira.atividade-item",
+      "repeatable": true
+    }
+  },
+  "config": {}
+}

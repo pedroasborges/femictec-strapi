@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_feira_programacaos",
+  "info": {
+    "displayName": "programacao"
+  },
+  "options": {},
+  "attributes": {
+    "programacaoTitulo": {
+      "type": "string"
+    },
+    "programacaoDias": {
+      "type": "component",
+      "component": "feira.programacao-dia",
+      "repeatable": true
+    }
+  },
+  "config": {}
+}

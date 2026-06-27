@@ -1,0 +1,66 @@
+{
+  "collectionName": "components_femictec_apresentacaos",
+  "info": {
+    "displayName": "apresentacao"
+  },
+  "options": {},
+  "attributes": {
+    "tituloPrincipal": {
+      "type": "string"
+    },
+    "subtituloPrincipal": {
+      "type": "string"
+    },
+    "oQueTitulo": {
+      "type": "string"
+    },
+    "oQueDescricao": {
+      "type": "text"
+    },
+    "missaoTitulo": {
+      "type": "string"
+    },
+    "missaoDestaque": {
+      "type": "string"
+    },
+    "missaoDescricao": {
+      "type": "text"
+    },
+    "impactoTitulo": {
+      "type": "string"
+    },
+    "impactoDescricao": {
+      "type": "text"
+    },
+    "estandesImagem": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "estandesImagemAlt": {
+      "type": "string"
+    },
+    "bannerTitulo": {
+      "type": "string"
+    },
+    "bannerDestaque": {
+      "type": "string"
+    },
+    "bannerImagem": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "estandesTitulo": {
+      "type": "string"
+    },
+    "estandesSubtitulo": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}

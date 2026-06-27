@@ -1,0 +1,32 @@
+{
+  "kind": "singleType",
+  "collectionName": "localizacaos",
+  "info": {
+    "singularName": "localizacao",
+    "pluralName": "localizacaos",
+    "displayName": "Localizacao"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "titulo": {
+      "type": "string",
+      "default": "Localização em manutenção",
+      "maxLength": 25
+    },
+    "descricao": {
+      "type": "text"
+    },
+    "endereco": {
+      "type": "string",
+      "default": "Endereço:",
+      "maxLength": 100
+    },
+    "coordenadas": {
+      "type": "string",
+      "maxLength": 50
+    }
+  }
+}

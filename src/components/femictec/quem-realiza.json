@@ -1,0 +1,46 @@
+{
+  "collectionName": "components_femictec_quem_realizas",
+  "info": {
+    "displayName": "quem-realiza"
+  },
+  "options": {},
+  "attributes": {
+    "quemRealizaTitulo": {
+      "type": "string"
+    },
+    "organizacaoTitulo": {
+      "type": "string"
+    },
+    "organizacaoDescricao": {
+      "type": "text"
+    },
+    "comissaoTitulo": {
+      "type": "string"
+    },
+    "comissaoDescricao": {
+      "type": "text"
+    },
+    "imagemEntrada": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "imagemEntradaAlt": {
+      "type": "string"
+    },
+    "imagemEntradaLabel": {
+      "type": "string"
+    },
+    "parceirosTitulo": {
+      "type": "string"
+    },
+    "parceiros": {
+      "type": "component",
+      "component": "femictec.parceiro-item",
+      "repeatable": true
+    }
+  },
+  "config": {}
+}

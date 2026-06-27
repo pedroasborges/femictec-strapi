@@ -1,0 +1,46 @@
+{
+  "kind": "singleType",
+  "collectionName": "dado_institucionals",
+  "info": {
+    "singularName": "dado-institucional",
+    "pluralName": "dado-institucionals",
+    "displayName": "Home - Dado Institucional"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "imagemEstudanteUrl": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "textoInscricao": {
+      "type": "text",
+      "maxLength": 500
+    },
+    "linkPlataforma": {
+      "type": "string",
+      "maxLength": 25
+    },
+    "dataLimite": {
+      "type": "date"
+    },
+    "tituloResumo": {
+      "type": "string",
+      "maxLength": 25
+    },
+    "textoResumo": {
+      "type": "text"
+    },
+    "urlVideo": {
+      "type": "string"
+    }
+  }
+}

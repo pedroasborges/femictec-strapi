@@ -1,0 +1,30 @@
+{
+  "kind": "singleType",
+  "collectionName": "feiras",
+  "info": {
+    "singularName": "feira",
+    "pluralName": "feiras",
+    "displayName": "Feira"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "visaoGeral": {
+      "type": "component",
+      "component": "feira.visao-geral",
+      "repeatable": false
+    },
+    "cronograma": {
+      "type": "component",
+      "component": "feira.cronograma",
+      "repeatable": false
+    },
+    "programacao": {
+      "type": "component",
+      "component": "feira.programacao",
+      "repeatable": false
+    }
+  }
+}

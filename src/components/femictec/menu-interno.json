@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_femictec_menu_internos",
+  "info": {
+    "displayName": "menu-interno"
+  },
+  "options": {},
+  "attributes": {
+    "menuItemInicioLabel": {
+      "type": "string"
+    },
+    "menuItemQuemRealizaLabel": {
+      "type": "string"
+    },
+    "menuItemHistoricoLabel": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}

@@ -1,0 +1,36 @@
+{
+  "kind": "singleType",
+  "collectionName": "femictecs",
+  "info": {
+    "singularName": "femictec",
+    "pluralName": "femictecs",
+    "displayName": "Página - FEMICTEC"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "menuInterno": {
+      "type": "component",
+      "component": "femictec.menu-interno",
+      "repeatable": false
+    },
+    "apresentacao": {
+      "type": "component",
+      "component": "femictec.apresentacao",
+      "repeatable": false
+    },
+    "quemRealiza": {
+      "type": "component",
+      "component": "femictec.quem-realiza",
+      "repeatable": false
+    },
+    "historico": {
+      "type": "component",
+      "component": "femictec.historico",
+      "repeatable": false
+    }
+  }
+}
+

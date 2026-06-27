@@ -1,0 +1,34 @@
+{
+  "kind": "singleType",
+  "collectionName": "footers",
+  "info": {
+    "singularName": "footer",
+    "pluralName": "footers",
+    "displayName": "Global - Footer"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Email": {
+      "type": "email"
+    },
+    "Telefone": {
+      "type": "string",
+      "maxLength": 25
+    },
+    "Instagram": {
+      "type": "string",
+      "maxLength": 25
+    },
+    "Facebook": {
+      "type": "string",
+      "maxLength": 25
+    },
+    "Youtube": {
+      "type": "string",
+      "maxLength": 25
+    }
+  }
+}

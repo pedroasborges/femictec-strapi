@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_feira_atividade_items",
+  "info": {
+    "displayName": "atividade-item"
+  },
+  "options": {},
+  "attributes": {
+    "horario": {
+      "type": "string",
+      "default": "Horário a definir",
+      "maxLength": 20
+    },
+    "titulo": {
+      "type": "string",
+      "maxLength": 25
+    }
+  },
+  "config": {}
+}

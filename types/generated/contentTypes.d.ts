@@ -430,6 +430,525 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiBannerBanner extends Struct.CollectionTypeSchema {
+  collectionName: 'banners';
+  info: {
+    displayName: 'Home - Banner';
+    pluralName: 'banners';
+    singularName: 'banner';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    Imagem: Schema.Attribute.Media<'images'>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::banner.banner'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiContatoContato extends Struct.SingleTypeSchema {
+  collectionName: 'contatos';
+  info: {
+    displayName: 'Contato';
+    pluralName: 'contatos';
+    singularName: 'contato';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    confirmacaoAssuntoTemplate: Schema.Attribute.String;
+    confirmacaoMensagemTemplate: Schema.Attribute.Text;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    descricao: Schema.Attribute.Text;
+    destinatariosEvento: Schema.Attribute.Component<
+      'contato.destinatario-email',
+      true
+    >;
+    email: Schema.Attribute.Email;
+    endereco: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::contato.contato'
+    > &
+      Schema.Attribute.Private;
+    notificacaoAssuntoTemplate: Schema.Attribute.String;
+    notificacaoMensagemTemplate: Schema.Attribute.Text;
+    publishedAt: Schema.Attribute.DateTime;
+    subtitulo: Schema.Attribute.String;
+    telefone: Schema.Attribute.String;
+    titulo: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiDadoInstitucionalDadoInstitucional
+  extends Struct.SingleTypeSchema {
+  collectionName: 'dado_institucionals';
+  info: {
+    displayName: 'Home - Dado Institucional';
+    pluralName: 'dado-institucionals';
+    singularName: 'dado-institucional';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    dataLimite: Schema.Attribute.Date;
+    imagemEstudanteUrl: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
+    linkPlataforma: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::dado-institucional.dado-institucional'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    textoInscricao: Schema.Attribute.Text;
+    textoResumo: Schema.Attribute.Text;
+    tituloResumo: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    urlVideo: Schema.Attribute.String;
+  };
+}
+
+export interface ApiEdicaoGaleriaEdicaoGaleria
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'edicao_galerias';
+  info: {
+    displayName: 'Edi\u00E7\u00E3o Galeria';
+    pluralName: 'edicao-galerias';
+    singularName: 'edicao-galeria';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    dataEdicao: Schema.Attribute.Date & Schema.Attribute.Required;
+    imagens: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios',
+      true
+    > &
+      Schema.Attribute.Required;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::edicao-galeria.edicao-galeria'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    slug: Schema.Attribute.UID<'tituloEdicao'> & Schema.Attribute.Required;
+    tituloEdicao: Schema.Attribute.String & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiEventosFeiraEventosFeira
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'eventos_feiras';
+  info: {
+    displayName: 'Eventos_feira';
+    pluralName: 'eventos-feiras';
+    singularName: 'eventos-feira';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    dataHorario: Schema.Attribute.DateTime;
+    descricao: Schema.Attribute.String;
+    imagemEvento: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios',
+      true
+    >;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::eventos-feira.eventos-feira'
+    > &
+      Schema.Attribute.Private;
+    miniDescricao: Schema.Attribute.String;
+    nomeEvento: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiFaqFaq extends Struct.SingleTypeSchema {
+  collectionName: 'faqs';
+  info: {
+    displayName: 'Perguntas Frequentes';
+    pluralName: 'faqs';
+    singularName: 'faq';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::faq.faq'> &
+      Schema.Attribute.Private;
+    perguntas: Schema.Attribute.Component<'faq.pergunta-faq', true>;
+    publishedAt: Schema.Attribute.DateTime;
+    subtitulo: Schema.Attribute.String;
+    titulo: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiFeiraFeira extends Struct.SingleTypeSchema {
+  collectionName: 'feiras';
+  info: {
+    displayName: 'Feira';
+    pluralName: 'feiras';
+    singularName: 'feira';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    cronograma: Schema.Attribute.Component<'feira.cronograma', false>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::feira.feira'> &
+      Schema.Attribute.Private;
+    programacao: Schema.Attribute.Component<'feira.programacao', false>;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    visaoGeral: Schema.Attribute.Component<'feira.visao-geral', false>;
+  };
+}
+
+export interface ApiFemictecFemictec extends Struct.SingleTypeSchema {
+  collectionName: 'femictecs';
+  info: {
+    displayName: 'P\u00E1gina - FEMICTEC';
+    pluralName: 'femictecs';
+    singularName: 'femictec';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    apresentacao: Schema.Attribute.Component<'femictec.apresentacao', false>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    historico: Schema.Attribute.Component<'femictec.historico', false>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::femictec.femictec'
+    > &
+      Schema.Attribute.Private;
+    menuInterno: Schema.Attribute.Component<'femictec.menu-interno', false>;
+    publishedAt: Schema.Attribute.DateTime;
+    quemRealiza: Schema.Attribute.Component<'femictec.quem-realiza', false>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiFooterFooter extends Struct.SingleTypeSchema {
+  collectionName: 'footers';
+  info: {
+    displayName: 'Global - Footer';
+    pluralName: 'footers';
+    singularName: 'footer';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    Email: Schema.Attribute.Email;
+    Facebook: Schema.Attribute.String;
+    Instagram: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::footer.footer'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    Telefone: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    Youtube: Schema.Attribute.String;
+  };
+}
+
+export interface ApiHomeDataHomeData extends Struct.SingleTypeSchema {
+  collectionName: 'home_datas';
+  info: {
+    displayName: 'Home - Datas';
+    pluralName: 'home-datas';
+    singularName: 'home-data';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    etapa1Data: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 12;
+      }> &
+      Schema.Attribute.DefaultTo<'Submiss\u00E3o'>;
+    etapa1Titulo: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 20;
+      }>;
+    etapa2Data: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 12;
+      }> &
+      Schema.Attribute.DefaultTo<'Avalia\u00E7\u00E3o'>;
+    etapa2Titulo: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 20;
+      }>;
+    etapa3Data: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 12;
+      }> &
+      Schema.Attribute.DefaultTo<'Resultados'>;
+    etapa3Titulo: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 20;
+      }>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::home-data.home-data'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    tituloSecao: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiLocalizacaoLocalizacao extends Struct.SingleTypeSchema {
+  collectionName: 'localizacaos';
+  info: {
+    displayName: 'Localizacao';
+    pluralName: 'localizacaos';
+    singularName: 'localizacao';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    coordenadas: Schema.Attribute.String;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    descricao: Schema.Attribute.Text;
+    endereco: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::localizacao.localizacao'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    titulo: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiMensagensContatoMensagensContato
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'mensagens_contatos';
+  info: {
+    displayName: 'Mensagens Contato';
+    pluralName: 'mensagens-contatos';
+    singularName: 'mensagens-contato';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    anexo: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    assunto: Schema.Attribute.String & Schema.Attribute.Required;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    email: Schema.Attribute.Email & Schema.Attribute.Required;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::mensagens-contato.mensagens-contato'
+    > &
+      Schema.Attribute.Private;
+    mensagem: Schema.Attribute.Text & Schema.Attribute.Required;
+    nome: Schema.Attribute.String & Schema.Attribute.Required;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiNavbarNavbar extends Struct.SingleTypeSchema {
+  collectionName: 'navbars';
+  info: {
+    displayName: 'Global - Navbar';
+    pluralName: 'navbars';
+    singularName: 'navbar';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::navbar.navbar'
+    > &
+      Schema.Attribute.Private;
+    logo: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios',
+      true
+    >;
+    logoAlt: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiNoticiaNoticia extends Struct.CollectionTypeSchema {
+  collectionName: 'noticias';
+  info: {
+    displayName: 'Noticia';
+    pluralName: 'noticias';
+    singularName: 'noticia';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    dataPublicacao: Schema.Attribute.DateTime;
+    dataUltimaEdicao: Schema.Attribute.DateTime;
+    descricao: Schema.Attribute.Text;
+    descricaoImagem: Schema.Attribute.String;
+    imagem: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios',
+      true
+    >;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::noticia.noticia'
+    > &
+      Schema.Attribute.Private;
+    miniDescricao: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 255;
+      }>;
+    publishedAt: Schema.Attribute.DateTime;
+    slug: Schema.Attribute.UID<'titulo'> & Schema.Attribute.Required;
+    titulo: Schema.Attribute.String & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiPoliticaDePrivacidadePoliticaDePrivacidade
+  extends Struct.SingleTypeSchema {
+  collectionName: 'politica_de_privacidades';
+  info: {
+    displayName: 'Pol\u00EDtica de Privacidade';
+    pluralName: 'politica-de-privacidades';
+    singularName: 'politica-de-privacidade';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    atualizadoEm: Schema.Attribute.String;
+    conteudo: Schema.Attribute.Text;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::politica-de-privacidade.politica-de-privacidade'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    subtitulo: Schema.Attribute.String;
+    titulo: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiProjetoProjeto extends Struct.CollectionTypeSchema {
   collectionName: 'projetos';
   info: {
@@ -441,18 +960,229 @@ export interface ApiProjetoProjeto extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    area: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 255;
+      }>;
+    conceitoFinal: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 120;
+      }>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    Descricao: Schema.Attribute.Blocks;
+    dataSubmissao: Schema.Attribute.DateTime;
+    descricao: Schema.Attribute.Blocks;
+    edicaoNome: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 255;
+      }>;
+    edicaoSlug: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 255;
+      }>;
+    escola: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 255;
+      }>;
+    eventoNome: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 255;
+      }>;
+    eventoSlug: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 255;
+      }>;
+    fontePayload: Schema.Attribute.JSON;
+    imagem: Schema.Attribute.Media<'images'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::projeto.projeto'
     > &
       Schema.Attribute.Private;
+    notaFinal: Schema.Attribute.Decimal;
+    orientador: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 255;
+      }>;
+    origemId: Schema.Attribute.Integer &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
+    participantes: Schema.Attribute.Integer &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 0;
+        },
+        number
+      > &
+      Schema.Attribute.DefaultTo<0>;
+    participantesNomes: Schema.Attribute.JSON;
+    publico: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     publishedAt: Schema.Attribute.DateTime;
-    Titulo: Schema.Attribute.String;
+    resumo: Schema.Attribute.Text;
+    statusExterno: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 120;
+      }>;
+    titulo: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 180;
+      }>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiRegulamentoRegulamento extends Struct.SingleTypeSchema {
+  collectionName: 'regulamentos';
+  info: {
+    displayName: 'Regulamento';
+    pluralName: 'regulamentos';
+    singularName: 'regulamento';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    conteudo: Schema.Attribute.Text;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::regulamento.regulamento'
+    > &
+      Schema.Attribute.Private;
+    pdfArquivo: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
+    pdfLabel: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    subtitulo: Schema.Attribute.String;
+    titulo: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiResultadoResultado extends Struct.CollectionTypeSchema {
+  collectionName: 'resultados';
+  info: {
+    displayName: 'Resultado';
+    pluralName: 'resultados';
+    singularName: 'resultado';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    area: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 255;
+      }>;
+    arquivo: Schema.Attribute.Media<'files'>;
+    avaliadoresNomes: Schema.Attribute.JSON;
+    categoria: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 120;
+      }>;
+    conceitoFinal: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 120;
+      }>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    dataSubmissao: Schema.Attribute.DateTime;
+    descricao: Schema.Attribute.Blocks;
+    edicao: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 120;
+      }>;
+    edicaoNome: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 255;
+      }>;
+    edicaoSlug: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 255;
+      }>;
+    escola: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 255;
+      }>;
+    fontePayload: Schema.Attribute.JSON;
+    imagem: Schema.Attribute.Media<'images'>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::resultado.resultado'
+    > &
+      Schema.Attribute.Private;
+    notaFinal: Schema.Attribute.Decimal;
+    orientador: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 255;
+      }>;
+    origemId: Schema.Attribute.Integer &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
+    participantes: Schema.Attribute.Integer &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 0;
+        },
+        number
+      > &
+      Schema.Attribute.DefaultTo<0>;
+    participantesNomes: Schema.Attribute.JSON;
+    publishedAt: Schema.Attribute.DateTime;
+    resumo: Schema.Attribute.Text;
+    statusExterno: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 120;
+      }>;
+    titulo: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 180;
+      }>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiTermoDeUsoTermoDeUso extends Struct.SingleTypeSchema {
+  collectionName: 'termo_de_usos';
+  info: {
+    displayName: 'Termo de Uso';
+    pluralName: 'termo-de-usos';
+    singularName: 'termo-de-uso';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    atualizadoEm: Schema.Attribute.String;
+    conteudo: Schema.Attribute.Text;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::termo-de-uso.termo-de-uso'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    subtitulo: Schema.Attribute.String;
+    titulo: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -970,7 +1700,25 @@ declare module '@strapi/strapi' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
+      'api::banner.banner': ApiBannerBanner;
+      'api::contato.contato': ApiContatoContato;
+      'api::dado-institucional.dado-institucional': ApiDadoInstitucionalDadoInstitucional;
+      'api::edicao-galeria.edicao-galeria': ApiEdicaoGaleriaEdicaoGaleria;
+      'api::eventos-feira.eventos-feira': ApiEventosFeiraEventosFeira;
+      'api::faq.faq': ApiFaqFaq;
+      'api::feira.feira': ApiFeiraFeira;
+      'api::femictec.femictec': ApiFemictecFemictec;
+      'api::footer.footer': ApiFooterFooter;
+      'api::home-data.home-data': ApiHomeDataHomeData;
+      'api::localizacao.localizacao': ApiLocalizacaoLocalizacao;
+      'api::mensagens-contato.mensagens-contato': ApiMensagensContatoMensagensContato;
+      'api::navbar.navbar': ApiNavbarNavbar;
+      'api::noticia.noticia': ApiNoticiaNoticia;
+      'api::politica-de-privacidade.politica-de-privacidade': ApiPoliticaDePrivacidadePoliticaDePrivacidade;
       'api::projeto.projeto': ApiProjetoProjeto;
+      'api::regulamento.regulamento': ApiRegulamentoRegulamento;
+      'api::resultado.resultado': ApiResultadoResultado;
+      'api::termo-de-uso.termo-de-uso': ApiTermoDeUsoTermoDeUso;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;

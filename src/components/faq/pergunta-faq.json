@@ -1,0 +1,15 @@
+﻿{
+  "collectionName": "components_faq_perguntas",
+  "info": {
+    "displayName": "Pergunta FAQ"
+  },
+  "options": {},
+  "attributes": {
+    "pergunta": {
+      "type": "string"
+    },
+    "resposta": {
+      "type": "text"
+    }
+  }
+}
